@@ -1,0 +1,694 @@
+/* src/styles/global.css */
+@import 'tailwindcss';
+
+:root {
+  --color-bg: #f4f2ee; /* pearl */
+  --color-fg: #0b0f14; /* near-black base */
+  --color-accent: #2da8ff;
+
+  /* Keep tokens but pivot aurora to BLUE -> PURPLE (no green) */
+  --color-aurora-blue-1: #2da8ff;
+  --color-aurora-blue-2: #3b82f6; /* blue-500 */
+  --color-aurora-purple-1: #8b5cf6; /* violet-500 */
+  --color-aurora-purple-2: #a78bfa; /* violet-400 */
+
+  --color-ink: color-mix(in oklab, var(--color-fg) 92%, #ffffff);
+  --color-subtle: color-mix(in oklab, var(--color-fg) 62%, var(--color-bg));
+
+  --color-card: color-mix(in oklab, var(--color-bg) 88%, #ffffff);
+  --color-border: color-mix(in oklab, var(--color-fg) 12%, var(--color-bg));
+}
+
+:root.dark {
+  --color-bg: #0b0f14;
+  --color-fg: #f4f2ee;
+
+  --color-subtle: color-mix(in oklab, var(--color-fg) 78%, var(--color-bg));
+  --color-ink: color-mix(in oklab, var(--color-fg) 97%, #ffffff);
+
+  --color-card: color-mix(in oklab, var(--color-bg) 86%, #111827);
+  --color-border: color-mix(in oklab, var(--color-fg) 14%, var(--color-bg));
+}
+
+/* Button tokens (light) */
+:root {
+  --btn-primary-bg: color-mix(in oklab, var(--color-accent) 92%, #ffffff);
+  --btn-primary-bg-hover: color-mix(in oklab, var(--color-accent) 86%, #ffffff);
+  --btn-primary-fg: #f4f2ee;
+  --btn-primary-border: color-mix(in oklab, var(--color-accent) 70%, #ffffff);
+
+  --btn-secondary-bg: color-mix(in oklab, var(--color-card) 92%, transparent);
+  --btn-secondary-bg-hover: color-mix(
+    in oklab,
+    var(--color-accent) 10%,
+    var(--color-card)
+  );
+  --btn-secondary-fg: var(--color-ink);
+  --btn-secondary-border: var(--color-border);
+
+  --card-hover-bg: var(--color-ink);
+  --card-hover-ink: var(--color-bg);
+  --card-hover-subtle: color-mix(in oklab, var(--color-bg) 76%, transparent);
+  --card-hover-border: color-mix(
+    in oklab,
+    var(--color-accent) 35%,
+    var(--color-ink)
+  );
+  --card-hover-shadow: 0 16px 44px rgba(0, 0, 0, 0.18);
+  --card-hover-ring: 0 0 0 2px
+    color-mix(in oklab, var(--color-accent) 30%, transparent);
+}
+
+/* Button tokens (dark) */
+:root.dark {
+  --btn-primary-bg: color-mix(in oklab, var(--color-accent) 80%, #0b0f14);
+  --btn-primary-bg-hover: color-mix(in oklab, var(--color-accent) 88%, #0b0f14);
+  --btn-primary-fg: #f4f2ee;
+  --btn-primary-border: color-mix(in oklab, var(--color-accent) 55%, #0b0f14);
+
+  --btn-secondary-bg: color-mix(in oklab, var(--color-card) 92%, transparent);
+  --btn-secondary-bg-hover: color-mix(
+    in oklab,
+    var(--color-accent) 14%,
+    var(--color-card)
+  );
+  --btn-secondary-fg: var(--color-ink);
+  --btn-secondary-border: var(--color-border);
+
+  --card-hover-bg: #f4f2ee;
+  --card-hover-ink: #0b0f14;
+  --card-hover-subtle: color-mix(in oklab, #0b0f14 72%, transparent);
+  --card-hover-border: color-mix(in oklab, var(--color-accent) 40%, #f4f2ee);
+  --card-hover-shadow: 0 18px 50px rgba(0, 0, 0, 0.42);
+  --card-hover-ring: 0 0 0 2px
+    color-mix(in oklab, var(--color-accent) 26%, transparent);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    background: var(--color-bg);
+  }
+  html.dark {
+    color-scheme: dark;
+    background: var(--color-bg);
+  }
+
+  body {
+    color: var(--color-ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+      Helvetica, Arial;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    position: relative;
+    isolation: isolate;
+    background: var(--color-bg);
+  }
+
+  /* Aurora global (animated “cloud” behind everything, blue -> purple) */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -35%;
+    pointer-events: none;
+    z-index: 0;
+
+    /* Slightly more present than before, still sleek */
+    filter: blur(92px) saturate(1.25);
+    opacity: 0.92;
+
+    /* Four blobs, all blue/purple — no green */
+    background: radial-gradient(
+        980px 640px at 14% 12%,
+        color-mix(in oklab, var(--color-aurora-blue-1) 34%, transparent),
+        transparent 64%
+      ),
+      radial-gradient(
+        980px 660px at 86% 18%,
+        color-mix(in oklab, var(--color-aurora-purple-2) 30%, transparent),
+        transparent 66%
+      ),
+      radial-gradient(
+        1120px 760px at 76% 86%,
+        color-mix(in oklab, var(--color-aurora-purple-1) 28%, transparent),
+        transparent 68%
+      ),
+      radial-gradient(
+        1120px 780px at 12% 84%,
+        color-mix(in oklab, var(--color-aurora-blue-2) 26%, transparent),
+        transparent 70%
+      );
+
+    background-repeat: no-repeat;
+    background-size: 155% 155%, 155% 155%, 165% 165%, 165% 165%;
+    background-position: 10% 10%, 90% 12%, 72% 92%, 12% 86%;
+
+    transform: translateZ(0);
+
+    /* “Nube” suave: sólo mueve posiciones (sin rotaciones raras) */
+    animation: aurora-cloud 18s ease-in-out infinite alternate;
+  }
+
+  /* Grid sutil (igual que ahora) */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.12;
+
+    background: repeating-linear-gradient(
+        to right,
+        color-mix(in oklab, var(--color-fg) 18%, transparent) 0px,
+        color-mix(in oklab, var(--color-fg) 18%, transparent) 1px,
+        transparent 1px,
+        transparent 72px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--color-fg) 18%, transparent) 0px,
+        color-mix(in oklab, var(--color-fg) 18%, transparent) 1px,
+        transparent 1px,
+        transparent 72px
+      );
+    transform: translateZ(0);
+  }
+
+  /* Dark mode: keep visible, slightly less opacity + deeper blur */
+  :root.dark body::before {
+    opacity: 0.68;
+    filter: blur(104px) saturate(1.18);
+  }
+  :root.dark body::after {
+    opacity: 0.1;
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  html.theme-transition body,
+  html.theme-transition header,
+  html.theme-transition main,
+  html.theme-transition footer,
+  html.theme-transition section,
+  html.theme-transition a,
+  html.theme-transition button,
+  html.theme-transition div,
+  html.theme-transition p,
+  html.theme-transition h1,
+  html.theme-transition h2,
+  html.theme-transition ul,
+  html.theme-transition li {
+    transition: background-color 180ms ease, color 180ms ease,
+      border-color 180ms ease, fill 180ms ease, stroke 180ms ease;
+  }
+
+  :where(a):focus-visible {
+    outline: none;
+    border-radius: 12px;
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-bg) 75%, transparent),
+      0 0 0 6px color-mix(in oklab, var(--color-accent) 28%, transparent);
+  }
+}
+
+/* Aurora animation keyframes */
+@keyframes aurora-cloud {
+  0% {
+    background-position: 10% 10%, 90% 12%, 72% 92%, 12% 86%;
+  }
+  50% {
+    background-position: 18% 22%, 78% 18%, 82% 78%, 22% 80%;
+  }
+  100% {
+    background-position: 24% 14%, 86% 30%, 64% 86%, 14% 72%;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-fg);
+    border: 1px solid var(--btn-primary-border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 180ms ease, box-shadow 180ms ease,
+      background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+    background: var(--btn-primary-bg-hover);
+  }
+  .btn-primary:active {
+    transform: translateY(0px) scale(0.99);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-secondary {
+    background: var(--btn-secondary-bg);
+    color: var(--btn-secondary-fg);
+    border: 1px solid var(--btn-secondary-border);
+    transition: transform 180ms ease, background-color 180ms ease,
+      border-color 180ms ease, color 180ms ease;
+  }
+  .btn-secondary:hover {
+    background: var(--btn-secondary-bg-hover);
+    transform: translateY(-1px);
+  }
+  .btn-secondary:active {
+    transform: translateY(0px) scale(0.99);
+  }
+
+  .btn-primary:focus-visible,
+  .btn-secondary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-bg) 75%, transparent),
+      0 0 0 6px color-mix(in oklab, var(--color-accent) 28%, transparent);
+  }
+
+  .card-hover {
+    transition: transform 200ms ease, box-shadow 200ms ease,
+      border-color 200ms ease, background-color 200ms ease;
+    will-change: transform;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-hover:hover {
+      transform: translateY(-2px);
+      background: var(--card-hover-bg);
+      border-color: var(--card-hover-border);
+      box-shadow: var(--card-hover-shadow), var(--card-hover-ring);
+    }
+
+    .card-hover:hover .card-title {
+      color: var(--card-hover-ink);
+    }
+    .card-hover:hover .card-desc {
+      color: var(--card-hover-subtle);
+    }
+  }
+
+  .hero-band {
+    position: relative;
+  }
+
+  /* iPhone (unchanged from your current) */
+  .iphone-container {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin-left: auto;
+    filter: drop-shadow(0 26px 70px rgba(0, 0, 0, 0.18));
+  }
+
+  .iphone-container.iphone-sm {
+    width: min(340px, 100%);
+  }
+
+  .iphone-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform-origin: 50% 50%;
+    animation: iphone-enter 760ms cubic-bezier(0.2, 0.9, 0.2, 1) 120ms both;
+  }
+
+  .iphone-frame-stroke {
+    opacity: 0;
+    stroke-dasharray: 1800;
+    stroke-dashoffset: 1800;
+    stroke: color-mix(in oklab, var(--color-ink) 26%, var(--color-border));
+    animation: iphone-stroke 1200ms ease 140ms forwards;
+  }
+
+  .iphone-bezel-stroke {
+    stroke: color-mix(in oklab, var(--color-border) 92%, transparent);
+    opacity: 0.9;
+  }
+
+  .iphone-screen-fill {
+    fill: color-mix(in oklab, var(--color-card) 86%, var(--color-bg));
+    opacity: 0;
+    animation: iphone-screen-in 900ms ease 260ms forwards;
+  }
+  :root.dark .iphone-screen-fill {
+    fill: color-mix(in oklab, #0b0f14 86%, #111827);
+  }
+
+  .top-dot {
+    fill: rgba(0, 0, 0, 0.78);
+    stroke: rgba(255, 255, 255, 0.12);
+    stroke-width: 1;
+  }
+  :root.dark .top-dot {
+    fill: rgba(0, 0, 0, 0.88);
+    stroke: rgba(255, 255, 255, 0.1);
+  }
+
+  .iphone-svg .wa-bubble {
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.12));
+  }
+  :root.dark .iphone-svg .wa-bubble {
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.28));
+  }
+
+  .iphone-svg .wa-bubble rect {
+    stroke: color-mix(in oklab, var(--color-border) 90%, transparent);
+    stroke-width: 1;
+  }
+
+  .iphone-svg .wa-bubble.wa-them rect {
+    fill: color-mix(in oklab, #ffffff 82%, var(--color-bg));
+  }
+
+  :root.dark .iphone-svg .wa-bubble.wa-them rect {
+    fill: rgba(244, 242, 238, 0.92);
+    stroke: rgba(255, 255, 255, 0.1);
+  }
+
+  .iphone-svg .wa-bubble.wa-me rect {
+    fill: color-mix(in oklab, var(--color-accent) 30%, var(--color-card));
+  }
+  :root.dark .iphone-svg .wa-bubble.wa-me rect {
+    fill: color-mix(in oklab, var(--color-accent) 26%, rgba(17, 24, 39, 1));
+    stroke: rgba(255, 255, 255, 0.08);
+  }
+
+  .iphone-svg .wa-highlight {
+    fill: rgba(255, 255, 255, 0.22);
+    opacity: 0.55;
+    stroke: none;
+  }
+  :root.dark .iphone-svg .wa-highlight {
+    fill: rgba(255, 255, 255, 0.14);
+    opacity: 0.6;
+  }
+
+  .iphone-svg .wa-line {
+    fill: color-mix(in oklab, var(--color-ink) 22%, transparent);
+    opacity: 0.78;
+  }
+  .iphone-svg .wa-me .wa-line {
+    fill: rgba(255, 255, 255, 0.82);
+    opacity: 0.9;
+  }
+  :root.dark .iphone-svg .wa-them .wa-line {
+    fill: rgba(11, 15, 20, 0.62);
+    opacity: 0.85;
+  }
+
+  .iphone-svg .wa-home-indicator {
+    fill: color-mix(in oklab, var(--color-ink) 18%, transparent);
+    opacity: 0.35;
+  }
+  :root.dark .iphone-svg .wa-home-indicator {
+    fill: rgba(244, 242, 238, 0.72);
+    opacity: 0.3;
+  }
+
+  .iphone-svg .wa-b1,
+  .iphone-svg .wa-b2,
+  .iphone-svg .wa-b3,
+  .iphone-svg .wa-b4 {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: wa-pop 900ms cubic-bezier(0.2, 0.9, 0.2, 1) var(--pop-delay)
+      forwards;
+  }
+
+  .iphone-svg .wa-b1 {
+    --pop-delay: 820ms;
+  }
+  .iphone-svg .wa-b2 {
+    --pop-delay: 1040ms;
+  }
+  .iphone-svg .wa-b3 {
+    --pop-delay: 1280ms;
+  }
+  .iphone-svg .wa-b4 {
+    --pop-delay: 1540ms;
+  }
+
+  @keyframes iphone-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+  }
+
+  @keyframes iphone-stroke {
+    0% {
+      opacity: 0;
+      stroke-dashoffset: 1800;
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes iphone-screen-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes wa-pop {
+    0% {
+      opacity: 0;
+      transform: translateY(12px) scale(0.985);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-2px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-secondary,
+  .card-hover,
+  .nav-link {
+    transition: none !important;
+  }
+
+  .reviews-track,
+  .brands-track {
+    animation: none !important;
+  }
+
+  body::before,
+  body::after {
+    display: none !important;
+  }
+
+  .iphone-svg,
+  .iphone-frame-stroke,
+  .iphone-screen-fill,
+  .iphone-svg .wa-b1,
+  .iphone-svg .wa-b2,
+  .iphone-svg .wa-b3,
+  .iphone-svg .wa-b4 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Mobile menu links */
+@layer components {
+  .nav-link {
+    display: block;
+    transition: transform 180ms ease, box-shadow 180ms ease,
+      border-color 180ms ease, background-color 180ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .nav-link:hover {
+      transform: translateY(-1px);
+      background: var(--card-hover-bg);
+      border-color: var(--card-hover-border);
+      box-shadow: var(--card-hover-shadow), var(--card-hover-ring);
+    }
+  }
+
+  .nav-link:active {
+    transform: translateY(0px) scale(0.99);
+  }
+}
+
+/* Reviews marquee */
+@layer components {
+  .reviews-marquee {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reviews-marquee::before,
+  .reviews-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 56px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .reviews-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-card), transparent);
+  }
+
+  .reviews-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-card), transparent);
+  }
+
+  .reviews-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    will-change: transform;
+    animation: reviews-marquee 56s linear infinite;
+    padding: 4px 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .reviews-marquee:hover .reviews-track {
+      animation-play-state: paused;
+    }
+  }
+
+  .review-card {
+    flex: 0 0 auto;
+    width: min(80vw, 360px);
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+    border-radius: 24px;
+    padding: 16px;
+    transition: transform 200ms ease, box-shadow 200ms ease,
+      border-color 200ms ease, background-color 200ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .review-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--card-hover-border);
+      box-shadow: var(--card-hover-shadow), var(--card-hover-ring);
+    }
+  }
+
+  .review-stars {
+    display: inline-flex;
+    gap: 2px;
+    color: var(--color-accent);
+  }
+
+  @keyframes reviews-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Brands marquee */
+@layer components {
+  .brands-marquee {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .brands-marquee::before,
+  .brands-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 56px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .brands-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-card), transparent);
+  }
+
+  .brands-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-card), transparent);
+  }
+
+  .brands-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    will-change: transform;
+    animation: brands-scroll 28s linear infinite;
+    padding: 6px 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .brands-marquee:hover .brands-track {
+      animation-play-state: paused;
+    }
+  }
+
+  .brand-pill {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in oklab, var(--color-card) 92%, transparent);
+    backdrop-filter: blur(6px);
+    min-height: 76px;
+    padding: 18px 22px;
+    color: var(--color-subtle);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .brand-pill.card-hover:hover {
+      color: var(--card-hover-ink);
+    }
+  }
+
+  @keyframes brands-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .brand-logo svg {
+    width: 64px;
+    height: 64px;
+  }
+}

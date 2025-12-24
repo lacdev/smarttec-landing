@@ -1,11 +1,770 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// src/pages/index.astro
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import image2 from "../assets/image2.png";
+import image4 from "../assets/image4.png";
+
+// Process Icons
+import MessageCircle from "@lucide/astro/icons/message-circle";
+import Microscope from "@lucide/astro/icons/microscope";
+import ListCheck from "@lucide/astro/icons/list-check";
+import Wrench from "@lucide/astro/icons/wrench";
+import ShieldCheck from "@lucide/astro/icons/shield-check";
+import MessageCircleMore from "@lucide/astro/icons/message-circle-more";
+
+// Services Icons
+import BatteryCharging from "@lucide/astro/icons/battery-charging";
+import Smartphone from "@lucide/astro/icons/smartphone";
+import Usb from "@lucide/astro/icons/usb";
+import Volume2 from "@lucide/astro/icons/volume-2";
+import Camera from "@lucide/astro/icons/camera";
+import ToggleLeft from "@lucide/astro/icons/toggle-left";
+import Droplets from "@lucide/astro/icons/droplets";
+import Power from "@lucide/astro/icons/power";
+import CircuitBoard from "@lucide/astro/icons/circuit-board";
+import TabletSmartphone from "@lucide/astro/icons/tablet-smartphone";
+
+// CTA Icons
+import PhoneCall from "@lucide/astro/icons/phone-call";
+import MapPin from "@lucide/astro/icons/map-pin";
+
+// Theme Icons (Lucide)
+import Moon from "@lucide/astro/icons/moon";
+import Sun from "@lucide/astro/icons/sun";
+
+const phone = "+52 479 215 5743";
+const telHref = "tel:+524792155743";
+const mapsHref = "https://maps.app.goo.gl/bYxzHKAHKj3JeAZ6";
+
+const waText = encodeURIComponent(
+  "Hola Smarttec, quiero cotizar. Origen: Sitio web. Modelo: _____ Falla: _____ ¿Prende?: _____ ¿Se mojó o recibió golpe?: _____ (Adjunto foto/video)."
+);
+const waHref = `https://wa.me/524792155743?text=${waText}`;
+
+const reviewHref = "https://g.page/r/CTx7L5uuenBrEBM/review";
+
+import {
+  siApple,
+  siSamsung,
+  siHuawei,
+  siXiaomi,
+  siMotorola,
+  siGoogle,
+  siSony,
+  siNokia,
+  siOneplus,
+  siOppo,
+} from "simple-icons/icons";
+
+const brands = [
+  [siApple, "Apple"],
+  [siSamsung, "Samsung"],
+  [siHuawei, "Huawei"],
+  [siXiaomi, "Xiaomi"],
+  [siMotorola, "Motorola"],
+  [siGoogle, "Google Pixel"],
+  [siSony, "Sony"],
+  [siNokia, "Nokia"],
+  [siOneplus, "OnePlus"],
+  [siOppo, "OPPO"],
+];
+
+const brandSvg = (icon: any) => `
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="h-9 w-9 sm:h-10 sm:w-10">
+    <path d="${icon.path}" fill="currentColor"></path>
+  </svg>
+`;
+
+const reviews = [
+  {
+    name: "Mariana R.",
+    when: "Hace 2 semanas",
+    text: "Excelente servicio. Me cambiaron la batería y quedó como nuevo. Me explicaron todo y me dieron garantía por escrito.",
+  },
+  {
+    name: "Luis A.",
+    when: "Hace 1 mes",
+    text: "Muy profesionales. Diagnosticaron rápido y me dieron opciones de calidad y precio. Cero sorpresas al final.",
+  },
+  {
+    name: "Fer G.",
+    when: "Hace 3 semanas",
+    text: "Reparación de centro de carga en el mismo día. Súper buena atención y el proceso muy transparente.",
+  },
+  {
+    name: "Jorge M.",
+    when: "Hace 2 meses",
+    text: "Me dio confianza que hicieron checklist y pruebas al entregar. La pantalla quedó perfecta.",
+  },
+  {
+    name: "Ana P.",
+    when: "Hace 1 semana",
+    text: "Atención premium. Me explicaron qué se iba a cambiar y por qué. Recomendadísimos en León.",
+  },
+  {
+    name: "Karla S.",
+    when: "Hace 3 meses",
+    text: "Tuve un iPhone mojado y me atendieron rápido. Me salvaron la información. Trato muy amable.",
+  },
+  {
+    name: "Diego C.",
+    when: "Hace 5 semanas",
+    text: "Buen precio para la calidad. Me gustó que respetan tiempos y te mantienen al tanto.",
+  },
+  {
+    name: "Sofía L.",
+    when: "Hace 2 meses",
+    text: "Todo claro desde el inicio: diagnóstico, opciones y garantía. Muy buena experiencia.",
+  },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Smarttec | Reparación premium de iPhone en León"
+  description="Reparación premium de iPhone y smartphones en León, Gto. +15 años de experiencia. Express en batería/centro de carga (según modelo), pantallas, mojados y placa. 90 días de garantía por escrito."
+>
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 border-b border-[color:var(--color-border)] bg-[color:var(--color-bg)]/80 backdrop-blur">
+    <div class="mx-auto flex max-w-[1100px] items-center justify-between gap-3 px-4 py-3">
+      <!-- Brand -->
+      <a href="#top" class="flex items-center gap-2" aria-label="Smarttec, ir al inicio">
+        <span aria-hidden="true" class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[color:var(--color-fg)] text-[color:var(--color-bg)]">
+          <span class="text-sm font-semibold">S</span>
+        </span>
+        <span class="hidden sm:inline text-sm font-semibold tracking-tight">Smarttec</span>
+      </a>
+
+      <!-- Desktop nav (lg+) -->
+      <nav class="hidden items-center gap-6 lg:flex" aria-label="Navegación principal">
+        <a href="#top" class="text-sm font-semibold text-[color:var(--color-subtle)] hover:text-[color:var(--color-ink)] transition-colors">Inicio</a>
+        <a href="#servicios" class="text-sm font-semibold text-[color:var(--color-subtle)] hover:text-[color:var(--color-ink)] transition-colors">Servicios</a>
+        <a href="#proceso" class="text-sm font-semibold text-[color:var(--color-subtle)] hover:text-[color:var(--color-ink)] transition-colors">Proceso</a>
+        <a href="#ubicacion" class="text-sm font-semibold text-[color:var(--color-subtle)] hover:text-[color:var(--color-ink)] transition-colors">Ubicación</a>
+        <a href="#resenas" class="text-sm font-semibold text-[color:var(--color-subtle)] hover:text-[color:var(--color-ink)] transition-colors">Reseñas</a>
+      </nav>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-2">
+        <a
+          href={waHref}
+          class="btn-primary inline-flex h-10 items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold sm:px-5 sm:gap-3"
+          aria-label="Cotizar por WhatsApp"
+        >
+          <MessageCircleMore class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
+          <span class="hidden sm:inline">Cotizar por WhatsApp</span>
+          <!-- ✅ cambio: en móvil también -->
+          <span class="sm:hidden">Cotizar por WhatsApp</span>
+        </a>
+
+        <button
+          id="themeToggle"
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-border)]"
+          aria-label="Cambiar modo claro/oscuro"
+        >
+          <Moon data-theme-icon="moon" class="h-5 w-5" stroke-width="2.25" aria-hidden="true" />
+          <Sun data-theme-icon="sun" class="hidden h-5 w-5" stroke-width="2.25" aria-hidden="true" />
+        </button>
+
+        <button
+          id="navToggle"
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-border)] lg:hidden"
+          aria-label="Abrir menú"
+          aria-controls="mobileNav"
+          aria-expanded="false"
+        >
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 6h16" />
+            <path d="M4 12h16" />
+            <path d="M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE MODAL -->
+  <div id="mobileNav" class="fixed inset-0 z-[60] hidden lg:hidden" aria-hidden="true">
+    <button
+      id="navBackdrop"
+      type="button"
+      class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-200"
+      aria-label="Cerrar menú"
+    ></button>
+
+    <aside
+      id="mobileNavPanel"
+      class="absolute right-4 top-4 w-[min(92vw,360px)] rounded-3xl border border-[color:var(--color-border)]
+             bg-[color:var(--color-card)] shadow-2xl backdrop-blur-sm
+             opacity-0 scale-[0.98] translate-y-1 transition-[opacity,transform] duration-200 ease-out"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú"
+      tabindex="-1"
+    >
+      <div class="flex items-center justify-between border-b border-[color:var(--color-border)] px-5 py-4">
+        <p class="text-sm font-semibold">Menú</p>
+        <button
+          id="navClose"
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-border)]"
+          aria-label="Cerrar menú"
+        >
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 6l12 12" />
+            <path d="M18 6l-12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="px-5 py-5">
+        <nav class="grid gap-2" aria-label="Navegación móvil">
+          <a href="#top" class="nav-link rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] px-4 py-3 text-sm font-semibold">Inicio</a>
+          <a href="#servicios" class="nav-link rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] px-4 py-3 text-sm font-semibold">Servicios</a>
+          <a href="#proceso" class="nav-link rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] px-4 py-3 text-sm font-semibold">Proceso</a>
+          <a href="#ubicacion" class="nav-link rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] px-4 py-3 text-sm font-semibold">Ubicación</a>
+          <a href="#resenas" class="nav-link rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] px-4 py-3 text-sm font-semibold">Reseñas</a>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
+  <main id="main">
+    <div id="top"></div>
+
+    <!-- HERO  -->
+    <section class="hero-band" aria-label="Inicio">
+      <div class="mx-auto max-w-[1100px] px-4 pb-10 pt-14 sm:pb-14 sm:pt-20">
+        <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+          <div class="text-center lg:text-left">
+            <p class="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-card)]/60 px-4 py-2 text-xs font-semibold text-[color:var(--color-subtle)] backdrop-blur">
+              Reparación de iPhone y Smartphone premium en León, Gto.
+              <span aria-hidden="true" class="h-1 w-1 rounded-full bg-[color:var(--color-accent)]"></span>
+              Garantía por escrito
+            </p>
+
+            <h1 class="mt-5 text-balance text-5xl font-semibold tracking-tight leading-[1.02] sm:text-6xl lg:text-7xl">
+              Tu teléfono, como nuevo.
+            </h1>
+
+            <p class="mx-auto mt-5 max-w-xl text-pretty text-[16.5px] leading-relaxed text-[color:var(--color-subtle)] sm:text-lg lg:mx-0">
+              Más de <span class="font-semibold text-[color:var(--color-ink)]">15 años</span> reparando iPhone y smartphones.
+            </p>
+
+            <p class="mx-auto mt-2 max-w-xl text-pretty text-[16.5px] leading-relaxed text-[color:var(--color-subtle)] sm:text-lg lg:mx-0">
+              Proceso transparente y <span class="font-semibold text-[color:var(--color-ink)]">garantía por escrito.</span>.
+            </p>
+
+            <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+              <a
+                href={waHref}
+                class="btn-primary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-3 text-sm font-semibold sm:w-auto"
+                aria-label="Cotizar por WhatsApp"
+              >
+                <MessageCircleMore class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
+                Cotizar por WhatsApp
+              </a>
+
+              <a
+                href={telHref}
+                class="btn-secondary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-3 text-sm font-semibold sm:w-auto"
+                aria-label="Llamar a Smarttec"
+              >
+                <PhoneCall class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
+                Llamar ahora
+              </a>
+            </div>
+
+            <div class="mt-7 flex flex-wrap items-center justify-center gap-2 text-xs text-[color:var(--color-subtle)] lg:justify-start">
+              <span class="inline-flex rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-card)]/60 px-3 py-1.5">Batería</span>
+              <span class="inline-flex rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-card)]/60 px-3 py-1.5">Pantalla</span>
+              <span class="inline-flex rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-card)]/60 px-3 py-1.5">Gorilla Glass</span>
+              <span class="inline-flex rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-card)]/60 px-3 py-1.5">Centro de carga</span>
+              <span class="inline-flex rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-card)]/60 px-3 py-1.5">Micro soldadura</span>
+            </div>
+          </div>
+
+          <!-- iPhone Premium Animation -->
+          <div class="hidden lg:block">
+            <div class="iphone-container ml-auto w-[75%]" aria-hidden="true">
+              <svg class="iphone-svg" viewBox="0 0 300 600" role="img" aria-label="iPhone (WhatsApp bubbles)">
+                <defs></defs>
+
+                <!-- Frame -->
+                <rect
+                  class="iphone-frame-stroke"
+                  x="15"
+                  y="15"
+                  width="270"
+                  height="570"
+                  rx="60"
+                  fill="none"
+                  stroke-width="5"
+                />
+
+                <!-- Bezel -->
+                <rect
+                  class="iphone-bezel-stroke"
+                  x="20"
+                  y="20"
+                  width="260"
+                  height="560"
+                  rx="55"
+                  fill="none"
+                  stroke-width="2"
+                />
+
+                <!-- Screen (flat, no gradients) -->
+                <rect
+                  class="iphone-screen-fill"
+                  x="20"
+                  y="20"
+                  width="260"
+                  height="560"
+                  rx="55"
+                />
+
+                <!-- Top dot (no island) -->
+                <circle class="top-dot" cx="150" cy="45" r="5" />
+
+                <!-- WhatsApp bubbles -->
+                <g class="wa-bubble wa-them wa-b1">
+                  <rect x="44" y="110" width="170" height="58" rx="18" />
+                  <rect class="wa-highlight" x="52" y="118" width="84" height="10" rx="5" />
+                  <rect class="wa-line" x="54" y="138" width="142" height="8" rx="4" />
+                  <rect class="wa-line" x="54" y="152" width="110" height="8" rx="4" />
+                </g>
+
+                <g class="wa-bubble wa-me wa-b2">
+                  <rect x="86" y="186" width="190" height="68" rx="18" />
+                  <rect class="wa-highlight" x="98" y="195" width="92" height="10" rx="5" />
+                  <rect class="wa-line" x="98" y="216" width="155" height="8" rx="4" />
+                  <rect class="wa-line" x="98" y="230" width="130" height="8" rx="4" />
+                </g>
+
+                <g class="wa-bubble wa-them wa-b3">
+                  <rect x="44" y="274" width="200" height="78" rx="18" />
+                  <rect class="wa-highlight" x="52" y="283" width="96" height="10" rx="5" />
+                  <rect class="wa-line" x="54" y="304" width="170" height="8" rx="4" />
+                  <rect class="wa-line" x="54" y="318" width="150" height="8" rx="4" />
+                  <rect class="wa-line" x="54" y="332" width="118" height="8" rx="4" />
+                </g>
+
+                <g class="wa-bubble wa-me wa-b4">
+                  <rect x="106" y="372" width="170" height="58" rx="18" />
+                  <rect class="wa-highlight" x="118" y="380" width="80" height="10" rx="5" />
+                  <rect class="wa-line" x="118" y="400" width="130" height="8" rx="4" />
+                  <rect class="wa-line" x="118" y="414" width="100" height="8" rx="4" />
+                </g>
+
+                <!-- Home indicator (subtle) -->
+                <rect class="wa-home-indicator" x="110" y="552" width="80" height="6" rx="3" opacity="0.35" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="proceso" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
+      <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
+        <h2 class="text-center text-[26px] font-semibold tracking-tight sm:text-2xl pb-4">
+          Nuestro proceso es rápido y sencillo
+        </h2>
+
+        <div class="mt-6 grid gap-4 text-center sm:grid-cols-2 lg:grid-cols-5">
+          {[
+            [MessageCircle, "Nos dices modelo + falla", "Ideal con foto/video."],
+            [Microscope, "Diagnóstico", "Revisión profesional."],
+            [ListCheck, "Opciones claras", "Calidad, garantía y rango."],
+            [Wrench, "Reparación + pruebas", "Checklist final."],
+            [ShieldCheck, "Entrega", "Garantía por escrito."],
+          ].map(([Icon, h, p]) => (
+            <div class="card-hover rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-5 text-center">
+              <div class="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)]">
+                <Icon class="h-5 w-5 text-[color:var(--color-accent)]" stroke-width="2.25" aria-hidden="true" />
+              </div>
+
+              <p class="card-title mt-2 text-sm font-semibold text-[color:var(--color-ink)]">{h}</p>
+              <p class="card-desc mt-1 text-sm text-[color:var(--color-subtle)]">{p}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- BRANDS -->
+    <section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14" aria-label="Marcas que reparamos">
+      <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Reparamos teléfonos de cualquier marca</h2>
+          <p class="mt-2 text-sm text-[color:var(--color-subtle)] pb-2">
+            Apple, Samsung, Huawei, Xiaomi, Motorola y muchas más.
+          </p>
+        </div>
+
+        <div class="brands-marquee mt-6" aria-hidden="true">
+          <div class="brands-track">
+            {brands.concat(brands).map(([icon]) => (
+              <div class="brand-pill card-hover rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] px-7 py-4">
+                <span class="inline-flex items-center justify-center text-[color:var(--color-subtle)]">
+                  <span class="brand-logo inline-flex" set:html={brandSvg(icon)} />
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p class="mt-4 text-center text-xs text-[color:var(--color-subtle)] pt-3">
+          *Los logos son marcas registradas de sus respectivos dueños.
+        </p>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="servicios" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
+      <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
+        <div class="text-center">
+          <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
+            Servicios principales
+          </h2>
+          <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
+            Cuéntanos modelo + falla y te damos estimado.
+          </p>
+        </div>
+
+        <div class="mt-6 grid gap-4 text-center sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            [BatteryCharging, "Batería (Express)", "Reemplazo profesional con pruebas."],
+            [Smartphone, "Pantalla", "Opciones de calidad según modelo."],
+            [Usb, "Centro de carga (Express)", "Diagnóstico y reparación del puerto."],
+            [TabletSmartphone, "Reemplazo de Cristal (Gorilla Glass)", "Cambio de cristal con acabado premium."],
+            [Volume2, "Audio", "Bocina, micrófono y auricular."],
+            [Camera, "Cámaras", "Pruebas de enfoque y funcionamiento."],
+            [ToggleLeft, "Botones", "Power, volumen, silencio."],
+            [Droplets, "Mojados", "Atención urgente para reducir corrosión."],
+            [Power, "No enciende / reinicios", "Diagnóstico avanzado (según caso)."],
+            [CircuitBoard, "Microsoldadura / placa", "Servicio avanzado con equipo especializado."],
+          ].map(([Icon, t, d]) => (
+            <div class="card-hover rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 text-center">
+              <div class="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)]">
+                <Icon class="h-5 w-5 text-[color:var(--color-accent)]" stroke-width="2.25" aria-hidden="true" />
+              </div>
+
+              <p class="card-title mt-3 text-sm font-semibold text-[color:var(--color-ink)]">{t}</p>
+              <p class="card-desc mt-2 text-sm text-[color:var(--color-subtle)]">{d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST 1 -->
+    <section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
+      <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
+        <div class="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr]">
+          <div class="text-center md:text-left">
+            <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
+              Te enseñamos lo que se cambia y te explicamos por qué.
+            </h2>
+            <p class="mt-3 text-sm leading-relaxed text-[color:var(--color-subtle)]">
+              Transparencia total: opciones claras, proceso documentado y checklist al entregar.
+            </p>
+          </div>
+
+          <!-- Hidden on mobile -->
+          <div class="hidden md:block">
+            <Image
+              src={image2}
+              alt="Ejemplo de reparación documentada y piezas reemplazadas"
+              width={900}
+              height={650}
+              loading="lazy"
+              decoding="async"
+              format="webp"
+              quality={82}
+              sizes="(min-width: 1024px) 420px, (min-width: 768px) 360px"
+              class="h-auto w-full rounded-2xl object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="resenas" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
+      <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
+            Qué dicen los clientes de nosotros
+          </h2>
+          <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
+            Reseñas de clientes en León. Servicio claro, reparación premium y garantía por escrito.
+          </p>
+        </div>
+
+        <div class="sr-only" aria-label="Reseñas destacadas">
+          <ul>
+            {reviews.slice(0, 4).map((r) => (
+              <li>{r.name}: {r.text}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="reviews-marquee mt-6">
+          <div class="reviews-track" aria-hidden="true">
+            {reviews.concat(reviews).map((r) => (
+              <article class="review-card">
+                <div class="flex items-start justify-between gap-4">
+                  <div class="min-w-0">
+                    <p class="truncate text-sm font-semibold text-[color:var(--color-ink)]">{r.name}</p>
+                    <div class="mt-2 flex items-center gap-2">
+                      <div class="review-stars" aria-label="5 de 5 estrellas">
+                        {Array.from({ length: 5 }).map(() => (
+                          <span class="star" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor">
+                              <path d="M12 2l2.91 6.63 7.09.61-5.35 4.63 1.62 6.93L12 17.77 5.73 20.8l1.62-6.93L2 9.24l7.09-.61L12 2z" />
+                            </svg>
+                          </span>
+                        ))}
+                      </div>
+                      <p class="text-xs text-[color:var(--color-subtle)]">{r.when}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="mt-3 text-sm leading-relaxed text-[color:var(--color-subtle)]">{r.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center">
+          <a
+            href={reviewHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-secondary inline-flex items-center justify-center gap-3 rounded-2xl px-5 py-3 text-sm font-semibold"
+            aria-label="Ver más reseñas en Google (abre en una pestaña nueva)"
+          >
+            Ver más reseñas en Google
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST 2 -->
+    <section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
+      <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
+        <div class="grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr]">
+          <!-- Hidden on mobile -->
+          <div class="hidden md:block">
+            <Image
+              src={image4}
+              alt="Ejemplo de checklist, sellos y garantía por escrito"
+              width={900}
+              height={650}
+              loading="lazy"
+              decoding="async"
+              format="webp"
+              quality={82}
+              sizes="(min-width: 1024px) 420px, (min-width: 768px) 360px"
+              class="h-auto w-full rounded-2xl object-cover"
+            />
+          </div>
+
+          <div class="text-center md:text-left">
+            <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
+              Cuentas claras, amistades largas.
+            </h2>
+
+            <div class="mt-6 flex justify-center md:justify-start">
+              <ul class="inline-grid max-w-md gap-3 text-left text-sm text-[color:var(--color-subtle)]">
+                {[
+                  "Checklist de ingreso + pruebas finales",
+                  "Sellos y garantía por escrito",
+                  "Refacciones Premium/OEM/alta calidad (tú eliges)",
+                  "Reparación express frente a ti (cuando aplica)",
+                ].map((t) => (
+                  <li class="relative pl-5">
+                    <span aria-hidden="true" class="absolute left-0 top-[0.62em] h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-[color:var(--color-accent)]"></span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section id="ubicacion" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
+      <div class="grid gap-4 lg:grid-cols-2">
+        <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
+          <div class="mx-auto max-w-md text-center">
+            <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Visítanos</h2>
+
+            <address class="mt-3 not-italic text-sm text-[color:var(--color-subtle)]">
+              Av. Panorama 923, esquina con Blvd. Campestre, León, Gto.
+            </address>
+
+            <div class="mt-5 grid gap-2 text-sm text-[color:var(--color-subtle)]">
+              <p><span class="font-semibold text-[color:var(--color-ink)]">Horario:</span> Lun–Vie 10:00–19:00 · Sáb 10:00–14:00</p>
+              <p><span class="font-semibold text-[color:var(--color-ink)]">Pagos:</span> Efectivo · Transferencia · Tarjeta (débito/crédito)</p>
+              <p>
+                <span class="font-semibold text-[color:var(--color-ink)]">Tel:</span>
+                <a class="underline decoration-transparent hover:decoration-current" href={telHref} aria-label="Llamar a Smarttec">
+                  {phone}
+                </a>
+              </p>
+            </div>
+
+            <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a
+                href={mapsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-5 py-3 text-sm font-semibold sm:w-auto"
+                aria-label="Abrir ubicación en Google Maps (abre en una pestaña nueva)"
+              >
+                <MapPin class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
+                Cómo llegar
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-2">
+          <iframe
+            class="h-[340px] w-full rounded-2xl"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Av.%20Panorama%20923%20Leon%20Guanajuato&output=embed"
+            title="Mapa Smarttec"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS CTA -->
+    <section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
+      <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
+        <div class="text-center">
+          <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">¿Ya te atendimos?</h2>
+          <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
+            Si quedaste a gusto, una reseña honesta en Google nos ayuda muchísimo a crecer en la zona.
+          </p>
+
+          <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href={reviewHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-5 py-3 text-sm font-semibold sm:w-auto"
+              aria-label="Dejar reseña en Google (abre en una pestaña nueva)"
+            >
+              Dejar reseña en Google
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISCLAIMER -->
+    <section class="mx-auto max-w-[1100px] px-4 py-14 sm:py-20">
+      <div class="text-center">
+        <p class="text-xs text-[color:var(--color-subtle)]">
+          *Diagnóstico sin costo aplicable al dejar el equipo a reparación. Si no se autoriza reparación, el diagnóstico puede generar un costo según el caso.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-[color:var(--color-border)] py-10">
+    <div class="mx-auto max-w-[1100px] px-4 text-center text-sm text-[color:var(--color-subtle)]">
+      <p class="font-semibold text-[color:var(--color-ink)]">Smarttec</p>
+      <p class="mt-2">Reparación premium de iPhone en León, Gto. · WhatsApp y llamadas: {phone}</p>
+    </div>
+  </footer>
+
+  <!-- Mobile menu script -->
+  <script is:inline>
+    (() => {
+      const toggle = document.getElementById("navToggle");
+      const menu = document.getElementById("mobileNav");
+      const panel = document.getElementById("mobileNavPanel");
+      const backdrop = document.getElementById("navBackdrop");
+      const closeBtn = document.getElementById("navClose");
+
+      if (!toggle || !menu || !panel || !backdrop || !closeBtn) return;
+
+      let lastFocused = null;
+
+      const open = () => {
+        lastFocused = document.activeElement;
+
+        menu.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+        toggle.setAttribute("aria-expanded", "true");
+        menu.setAttribute("aria-hidden", "false");
+
+        requestAnimationFrame(() => {
+          backdrop.classList.add("opacity-100");
+          panel.classList.add("opacity-100", "scale-100", "translate-y-0");
+          panel.classList.remove("opacity-0", "scale-[0.98]", "translate-y-1");
+        });
+
+        panel.focus();
+      };
+
+      const close = () => {
+        backdrop.classList.remove("opacity-100");
+        panel.classList.remove("opacity-100", "scale-100", "translate-y-0");
+        panel.classList.add("opacity-0", "scale-[0.98]", "translate-y-1");
+
+        toggle.setAttribute("aria-expanded", "false");
+        menu.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+
+        window.setTimeout(() => {
+          menu.classList.add("hidden");
+          if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+        }, 220);
+      };
+
+      toggle.addEventListener("click", () => {
+        const isOpen = toggle.getAttribute("aria-expanded") === "true";
+        if (isOpen) close();
+        else open();
+      });
+
+      closeBtn.addEventListener("click", close);
+      backdrop.addEventListener("click", close);
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
+        const isOpen = toggle.getAttribute("aria-expanded") === "true";
+        if (isOpen) close();
+      });
+
+      panel.querySelectorAll("a.nav-link").forEach((a) => a.addEventListener("click", close));
+
+      window.addEventListener("resize", () => {
+        if (window.matchMedia("(min-width: 1024px)").matches) {
+          backdrop.classList.remove("opacity-100");
+          panel.classList.add("opacity-0", "scale-[0.98]", "translate-y-1");
+          panel.classList.remove("opacity-100", "scale-100", "translate-y-0");
+          menu.classList.add("hidden");
+          toggle.setAttribute("aria-expanded", "false");
+          menu.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }
+      });
+    })();
+  </script>
 </Layout>

@@ -1,22 +1,219 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import "../styles/global.css";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+type Props = {
+  title?: string;
+  description?: string;
+  canonical?: string; // opcional: URL absoluta si quieres forzarla
+};
+
+const {
+  title = "Smarttec | Reparación premium de iPhone en León, Gto.",
+  description = "Reparación premium de iPhone y smartphones en León, Gto. +15 años de experiencia. Express en batería/centro de carga (según modelo), pantallas, mojados y placa. 90 días de garantía por escrito.",
+  canonical,
+} = Astro.props;
+
+// Canonical recomendado: requiere `site` en astro.config.mjs
+const site = Astro.site ? Astro.site.toString() : undefined;
+const canonicalUrl = canonical
+  ? canonical
+  : site
+    ? new URL(Astro.url.pathname, site).toString()
+    : undefined;
+
+// Datos negocio
+const phoneE164 = "+524792155743";
+const mapsUrl = "https://maps.app.goo.gl/bYxzHKAHKJj3JeAZ6";
+const reviewUrl = "https://g.page/r/CTx7L5uuenBrEBM/review";
+
+// Schema.org (sin inventar ratings)
+const schema = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "RepairService"],
+  ...(canonicalUrl ? { "@id": `${canonicalUrl}#smarttec` } : {}),
+  "name": "Smarttec",
+  "telephone": phoneE164,
+  "url": canonicalUrl ?? site,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. Panorama 923, esquina con Blvd. Campestre",
+    "addressLocality": "León",
+    "addressRegion": "Guanajuato",
+    "addressCountry": "MX",
+  },
+  "areaServed": { "@type": "City", "name": "León, Guanajuato" },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "10:00",
+      "closes": "19:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday"],
+      "opens": "10:00",
+      "closes": "14:00",
+    },
+  ],
+  "priceRange": "$$",
+  "hasMap": mapsUrl,
+  "sameAs": [mapsUrl, reviewUrl],
+  "knowsAbout": [
+    "Reparación de iPhone",
+    "Reparación de smartphones",
+    "Cambio de batería",
+    "Cambio de pantalla",
+    "Centro de carga",
+    "Microsoldadura",
+    "Daño por líquido",
+  ],
+};
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <!-- Indexación -->
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Idioma / hreflang -->
+    <link rel="alternate" hreflang="es-MX" href={canonicalUrl ?? site ?? "/"} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="Smarttec" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+
+    <!-- Twitter (sin imagen por ahora; si agregas, cambia a summary_large_image) -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Colores por esquema -->
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
+
+    <!-- Performance: Maps embed -->
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+
+    <!-- Icons (coloca estos archivos en /public) -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+
+    <!-- Theme: default = sistema. Si hay override (toggle), se respeta. -->
+    <script is:inline>
+      (() => {
+        const key = "smarttec-theme"; // "light" | "dark"
+        const root = document.documentElement;
+
+        const saved = localStorage.getItem(key);
+        const hasOverride = saved === "dark" || saved === "light";
+
+        const apply = (mode) => {
+          if (mode === "dark") root.classList.add("dark");
+          else root.classList.remove("dark");
+        };
+
+        const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+        const prefersDark = mq ? mq.matches : false;
+
+        apply(hasOverride ? saved : (prefersDark ? "dark" : "light"));
+
+        // Si NO hay override, responde a cambios del sistema
+        if (!hasOverride && mq) {
+          const onChange = (e) => apply(e.matches ? "dark" : "light");
+          if (mq.addEventListener) mq.addEventListener("change", onChange);
+          else mq.addListener?.(onChange);
+        }
+      })();
+    </script>
+  </head>
+
+  <body class="min-h-dvh antialiased">
+    <!-- Skip link -->
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[9999] focus:rounded-xl focus:bg-[color:var(--color-bg)] focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-[color:var(--color-ink)] focus:shadow-lg"
+    >
+      Saltar al contenido
+    </a>
+
+    <slot />
+
+    <!-- Theme toggle: guarda override y sincroniza icono -->
+    <script is:inline>
+      (() => {
+        const key = "smarttec-theme";
+
+        const syncThemeIcon = () => {
+          const btn = document.getElementById("themeToggle");
+          if (!btn) return;
+
+          const moon = btn.querySelector('[data-theme-icon="moon"]');
+          const sun = btn.querySelector('[data-theme-icon="sun"]');
+          if (!(moon instanceof Element) || !(sun instanceof Element)) return;
+
+          const root = document.documentElement;
+          const isDark = root.classList.contains("dark");
+
+          // Dark => sun visible. Light => moon visible.
+          if (isDark) {
+            sun.classList.remove("hidden");
+            moon.classList.add("hidden");
+          } else {
+            moon.classList.remove("hidden");
+            sun.classList.add("hidden");
+          }
+        };
+
+        const handleToggle = () => {
+          const root = document.documentElement;
+
+          root.classList.add("theme-transition");
+
+          const isDark = root.classList.toggle("dark");
+          localStorage.setItem(key, isDark ? "dark" : "light");
+
+          syncThemeIcon();
+
+          window.setTimeout(() => root.classList.remove("theme-transition"), 220);
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", syncThemeIcon);
+        } else {
+          syncThemeIcon();
+        }
+
+        document.addEventListener("click", (e) => {
+          const target = e.target;
+          if (!(target instanceof Element)) return;
+
+          const btn = target.closest("#themeToggle");
+          if (!btn) return;
+
+          handleToggle();
+        });
+      })();
+    </script>
+  </body>
+</html>

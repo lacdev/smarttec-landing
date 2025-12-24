@@ -17,9 +17,8 @@
     "astro-robots": "^2.3.1",
     "sharp": "^0.34.5",
     "simple-icons": "^16.2.0",
-    "tailwindcss": "^4.1.18"
-  },
-  "devDependencies": {
+    "tailwindcss": "^4.1.18",
     "wrangler": "^4.54.0"
+
   }
 }

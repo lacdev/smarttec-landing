@@ -4,8 +4,6 @@ import sitemap from '@astrojs/sitemap'
 import robots from 'astro-robots'
 import tailwindcss from '@tailwindcss/vite'
 
-import cloudflare from '@astrojs/cloudflare'
-
 export default defineConfig({
   site: 'https://smarttec.mx',
   output: 'static',
@@ -27,6 +25,4 @@ export default defineConfig({
       sitemap: 'https://smarttec.mx/sitemap-index.xml',
     }),
   ],
-
-  adapter: cloudflare(),
 })

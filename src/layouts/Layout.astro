@@ -23,7 +23,9 @@ const canonicalUrl = canonical
     : undefined;
 
 // OG Image URL - SIMPLIFICADO
-const siteOrigin = site ? new URL(site).origin : 'https://smarttec-landing.vercel.app';
+const siteOrigin = site
+  ? new URL(site).origin
+  : "https://smarttec-landing.vercel.app";
 const ogImageUrl = ogImage || `${siteOrigin}/og-image.jpg`;
 
 const phoneE164 = "+524792155743";
@@ -35,37 +37,37 @@ const schema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "RepairService"],
   ...(canonicalUrl ? { "@id": `${canonicalUrl}#smarttec` } : {}),
-  "name": "Smarttec",
-  "telephone": phoneE164,
-  "url": canonicalUrl ?? site,
-  ...(ogImageUrl ? { "image": ogImageUrl } : {}), // 👈 NUEVO
-  "description": description, // 👈 NUEVO
-  "address": {
+  name: "Smarttec",
+  telephone: phoneE164,
+  url: canonicalUrl ?? site,
+  ...(ogImageUrl ? { image: ogImageUrl } : {}), // 👈 NUEVO
+  description: description, // 👈 NUEVO
+  address: {
     "@type": "PostalAddress",
-    "streetAddress": "Av. Panorama 923, esquina con Blvd. Campestre",
-    "addressLocality": "León",
-    "addressRegion": "Guanajuato",
-    "addressCountry": "MX",
+    streetAddress: "Av. Panorama 923, esquina con Blvd. Campestre",
+    addressLocality: "León",
+    addressRegion: "Guanajuato",
+    addressCountry: "MX",
   },
-  "areaServed": { "@type": "City", "name": "León, Guanajuato" },
-  "openingHoursSpecification": [
+  areaServed: { "@type": "City", name: "León, Guanajuato" },
+  openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "10:00",
-      "closes": "19:00",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "10:00",
+      closes: "19:00",
     },
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Saturday"],
-      "opens": "10:00",
-      "closes": "14:00",
+      dayOfWeek: ["Saturday"],
+      opens: "10:00",
+      closes: "14:00",
     },
   ],
-  "priceRange": "$$",
-  "hasMap": mapsUrl,
-  "sameAs": [mapsUrl, reviewUrl],
-  "knowsAbout": [
+  priceRange: "$$",
+  hasMap: mapsUrl,
+  sameAs: [mapsUrl, reviewUrl],
+  knowsAbout: [
     "Reparación de iPhone",
     "Reparación de smartphones",
     "Cambio de batería",
@@ -75,13 +77,13 @@ const schema = {
     "Daño por líquido",
   ],
   // 👇 NUEVO: Solo si tienes reseñas reales verificables
-  "aggregateRating": {
+  aggregateRating: {
     "@type": "AggregateRating",
-    "ratingValue": "5",
-    "reviewCount": "8",
-    "bestRating": "5",
-    "worstRating": "5"
-  }
+    ratingValue: "5",
+    reviewCount: "8",
+    bestRating: "5",
+    worstRating: "5",
+  },
 };
 ---
 
@@ -89,7 +91,10 @@ const schema = {
 <html lang="es-MX">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -111,18 +116,32 @@ const schema = {
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Smarttec - Reparación premium de iPhone en León" />
+    <meta
+      property="og:image:alt"
+      content="Smarttec - Reparación premium de iPhone en León"
+    />
 
     <!-- 👇 MEJORADO: Twitter Card con imagen -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
-    <meta name="twitter:image:alt" content="Smarttec - Reparación premium de iPhone en León" />
+    <meta
+      name="twitter:image:alt"
+      content="Smarttec - Reparación premium de iPhone en León"
+    />
 
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="theme-color"
+      content="#f4f2ee"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#0b0f14"
+      media="(prefers-color-scheme: dark)"
+    />
 
     <link rel="preconnect" href="https://www.google.com" />
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
@@ -132,7 +151,7 @@ const schema = {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 
     <!-- JSON-LD con todo incluido -->
-    <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
     <script is:inline>
       (() => {
@@ -147,10 +166,12 @@ const schema = {
           else root.classList.remove("dark");
         };
 
-        const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+        const mq = window.matchMedia
+          ? window.matchMedia("(prefers-color-scheme: dark)")
+          : null;
         const prefersDark = mq ? mq.matches : false;
 
-        apply(hasOverride ? saved : (prefersDark ? "dark" : "light"));
+        apply(hasOverride ? saved : prefersDark ? "dark" : "light");
 
         if (!hasOverride && mq) {
           const onChange = (e) => apply(e.matches ? "dark" : "light");
@@ -205,7 +226,10 @@ const schema = {
 
           syncThemeIcon();
 
-          window.setTimeout(() => root.classList.remove("theme-transition"), 220);
+          window.setTimeout(
+            () => root.classList.remove("theme-transition"),
+            220,
+          );
         };
 
         if (document.readyState === "loading") {

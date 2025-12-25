@@ -4,16 +4,17 @@ import "../styles/global.css";
 type Props = {
   title?: string;
   description?: string;
-  canonical?: string; // opcional: URL absoluta si quieres forzarla
+  canonical?: string;
+  ogImage?: string;
 };
 
 const {
   title = "Smarttec | Reparación premium de iPhone en León, Gto.",
   description = "Reparación premium de iPhone y smartphones en León, Gto. +15 años de experiencia. Express en batería/centro de carga (según modelo), pantallas, mojados y placa. 90 días de garantía por escrito.",
   canonical,
+  ogImage,
 } = Astro.props;
 
-// Canonical recomendado: requiere `site` en astro.config.mjs
 const site = Astro.site ? Astro.site.toString() : undefined;
 const canonicalUrl = canonical
   ? canonical
@@ -21,12 +22,16 @@ const canonicalUrl = canonical
     ? new URL(Astro.url.pathname, site).toString()
     : undefined;
 
-// Datos negocio
+const ogImageUrl = ogImage
+  ? ogImage
+  : canonicalUrl
+    ? `${new URL(canonicalUrl).origin}/og-image.jpg`
+    : undefined;
+
 const phoneE164 = "+524792155743";
 const mapsUrl = "https://maps.app.goo.gl/bYxzHKAHKJj3JeAZ6";
 const reviewUrl = "https://g.page/r/CTx7L5uuenBrEBM/review";
 
-// Schema.org (sin inventar ratings)
 const schema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "RepairService"],
@@ -34,6 +39,8 @@ const schema = {
   "name": "Smarttec",
   "telephone": phoneE164,
   "url": canonicalUrl ?? site,
+  ...(ogImageUrl ? { "image": ogImageUrl } : {}),
+  "description": description,
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Av. Panorama 923, esquina con Blvd. Campestre",
@@ -67,7 +74,15 @@ const schema = {
     "Centro de carga",
     "Microsoldadura",
     "Daño por líquido",
+    "Reparación de Samsung"
   ],
+//   "aggregateRating": {
+//     "@type": "AggregateRating",
+//     "ratingValue": "5",
+//     "reviewCount": "8",
+//     "bestRating": "5",
+//     "worstRating": "5"
+//   }
 };
 ---
 
@@ -82,47 +97,45 @@ const schema = {
 
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
-    <!-- Indexación -->
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <!-- Idioma / hreflang -->
     <link rel="alternate" hreflang="es-MX" href={canonicalUrl ?? site ?? "/"} />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:site_name" content="Smarttec" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    {ogImageUrl && <meta property="og:image:width" content="1200" />}
+    {ogImageUrl && <meta property="og:image:height" content="630" />}
+    {ogImageUrl && <meta property="og:image:alt" content="Smarttec - Reparación premium de iPhone en León" />}
 
-    <!-- Twitter (sin imagen por ahora; si agregas, cambia a summary_large_image) -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content={ogImageUrl ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+    {ogImageUrl && <meta name="twitter:image:alt" content="Smarttec - Reparación premium de iPhone en León" />}
 
-    <!-- Colores por esquema -->
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
 
-    <!-- Performance: Maps embed -->
     <link rel="preconnect" href="https://www.google.com" />
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
 
-    <!-- Icons (coloca estos archivos en /public) -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 
-    <!-- JSON-LD -->
+    <!-- JSON-LD con todo incluido -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
 
-    <!-- Theme: default = sistema. Si hay override (toggle), se respeta. -->
     <script is:inline>
       (() => {
-        const key = "smarttec-theme"; // "light" | "dark"
+        const key = "smarttec-theme";
         const root = document.documentElement;
 
         const saved = localStorage.getItem(key);
@@ -138,7 +151,6 @@ const schema = {
 
         apply(hasOverride ? saved : (prefersDark ? "dark" : "light"));
 
-        // Si NO hay override, responde a cambios del sistema
         if (!hasOverride && mq) {
           const onChange = (e) => apply(e.matches ? "dark" : "light");
           if (mq.addEventListener) mq.addEventListener("change", onChange);
@@ -149,7 +161,6 @@ const schema = {
   </head>
 
   <body class="min-h-dvh antialiased">
-    <!-- Skip link -->
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[9999] focus:rounded-xl focus:bg-[color:var(--color-bg)] focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-[color:var(--color-ink)] focus:shadow-lg"
@@ -159,7 +170,6 @@ const schema = {
 
     <slot />
 
-    <!-- Theme toggle: guarda override y sincroniza icono -->
     <script is:inline>
       (() => {
         const key = "smarttec-theme";
@@ -175,7 +185,6 @@ const schema = {
           const root = document.documentElement;
           const isDark = root.classList.contains("dark");
 
-          // Dark => sun visible. Light => moon visible.
           if (isDark) {
             sun.classList.remove("hidden");
             moon.classList.add("hidden");

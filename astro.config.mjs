@@ -5,7 +5,7 @@ import robots from 'astro-robots'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  site: 'https://sunny-meringue-836667.netlify.app',
+  site: 'https://smarttec-landing.vercel.app',
   output: 'static',
 
   trailingSlash: 'never',

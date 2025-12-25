@@ -25,7 +25,7 @@ const canonicalUrl = canonical
 const ogImageUrl = ogImage
   ? ogImage
   : canonicalUrl
-    ? `${new URL(canonicalUrl).origin}/og-image.jpg`
+    ? `${new URL(canonicalUrl).origin}/og-image.jpg?v=2`  // ← Agrega ?v=2
     : undefined;
 
 const phoneE164 = "+524792155743";

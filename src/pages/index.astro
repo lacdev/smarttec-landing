@@ -1,5 +1,4 @@
 ---
-// src/pages/index.astro
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
@@ -57,6 +56,9 @@ import {
   siOneplus,
   siOppo,
 } from "simple-icons/icons";
+
+import WhatsAppIcon from "../components/WhatsAppIcon.astro";
+
 
 const brands = [
   [siApple, "Apple"],
@@ -152,10 +154,9 @@ const reviews = [
           class="btn-primary inline-flex h-10 items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold sm:px-5 sm:gap-3"
           aria-label="Cotizar por WhatsApp"
         >
-          <MessageCircleMore class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
-          <span class="hidden sm:inline">Cotizar por WhatsApp</span>
-          <!-- ✅ cambio: en móvil también -->
-          <span class="sm:hidden">Cotizar por WhatsApp</span>
+         <WhatsAppIcon class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
+  <span class="sm:hidden">Cotizar</span>
+  <span class="hidden sm:inline">Cotizar por WhatsApp</span>
         </a>
 
         <button
@@ -242,8 +243,6 @@ const reviews = [
           <div class="text-center lg:text-left">
             <p class="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-card)]/60 px-4 py-2 text-xs font-semibold text-[color:var(--color-subtle)] backdrop-blur">
               Reparación de iPhone y Smartphone premium en León, Gto.
-              <span aria-hidden="true" class="h-1 w-1 rounded-full bg-[color:var(--color-accent)]"></span>
-              Garantía por escrito
             </p>
 
             <h1 class="mt-5 text-balance text-5xl font-semibold tracking-tight leading-[1.02] sm:text-6xl lg:text-7xl">
@@ -264,7 +263,7 @@ const reviews = [
                 class="btn-primary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-3 text-sm font-semibold sm:w-auto"
                 aria-label="Cotizar por WhatsApp"
               >
-                <MessageCircleMore class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
+         <WhatsAppIcon class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
                 Cotizar por WhatsApp
               </a>
 

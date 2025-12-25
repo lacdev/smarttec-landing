@@ -5,7 +5,7 @@ type Props = {
   title?: string;
   description?: string;
   canonical?: string;
-  ogImage?: string;
+  ogImage?: string; // 👈 NUEVO: permite pasar imagen custom
 };
 
 const {
@@ -22,16 +22,15 @@ const canonicalUrl = canonical
     ? new URL(Astro.url.pathname, site).toString()
     : undefined;
 
-const ogImageUrl = ogImage
-  ? ogImage
-  : canonicalUrl
-    ? `${new URL(canonicalUrl).origin}/og-image.jpg?v=2`  // ← Agrega ?v=2
-    : undefined;
+// OG Image URL - SIMPLIFICADO
+const siteOrigin = site ? new URL(site).origin : 'https://smarttec-landing.vercel.app';
+const ogImageUrl = ogImage || `${siteOrigin}/og-image.jpg`;
 
 const phoneE164 = "+524792155743";
 const mapsUrl = "https://maps.app.goo.gl/bYxzHKAHKJj3JeAZ6";
 const reviewUrl = "https://g.page/r/CTx7L5uuenBrEBM/review";
 
+// 👇 MEJORA: Schema con aggregateRating si tienes las reseñas
 const schema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "RepairService"],
@@ -39,8 +38,8 @@ const schema = {
   "name": "Smarttec",
   "telephone": phoneE164,
   "url": canonicalUrl ?? site,
-  ...(ogImageUrl ? { "image": ogImageUrl } : {}),
-  "description": description,
+  ...(ogImageUrl ? { "image": ogImageUrl } : {}), // 👈 NUEVO
+  "description": description, // 👈 NUEVO
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Av. Panorama 923, esquina con Blvd. Campestre",
@@ -74,15 +73,15 @@ const schema = {
     "Centro de carga",
     "Microsoldadura",
     "Daño por líquido",
-    "Reparación de Samsung"
   ],
-//   "aggregateRating": {
-//     "@type": "AggregateRating",
-//     "ratingValue": "5",
-//     "reviewCount": "8",
-//     "bestRating": "5",
-//     "worstRating": "5"
-//   }
+  // 👇 NUEVO: Solo si tienes reseñas reales verificables
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "8",
+    "bestRating": "5",
+    "worstRating": "5"
+  }
 };
 ---
 
@@ -102,22 +101,24 @@ const schema = {
 
     <link rel="alternate" hreflang="es-MX" href={canonicalUrl ?? site ?? "/"} />
 
+    <!-- 👇 MEJORADO: Open Graph con imagen -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:site_name" content="Smarttec" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
-    {ogImageUrl && <meta property="og:image:width" content="1200" />}
-    {ogImageUrl && <meta property="og:image:height" content="630" />}
-    {ogImageUrl && <meta property="og:image:alt" content="Smarttec - Reparación premium de iPhone en León" />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Smarttec - Reparación premium de iPhone en León" />
 
-    <meta name="twitter:card" content={ogImageUrl ? "summary_large_image" : "summary"} />
+    <!-- 👇 MEJORADO: Twitter Card con imagen -->
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
-    {ogImageUrl && <meta name="twitter:image:alt" content="Smarttec - Reparación premium de iPhone en León" />}
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content="Smarttec - Reparación premium de iPhone en León" />
 
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)" />

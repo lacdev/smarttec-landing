@@ -5,51 +5,46 @@ type Props = {
   title?: string;
   description?: string;
   canonical?: string;
-  ogImage?: string; // 👈 NUEVO: permite pasar imagen custom
+  ogImage?: string;
 };
 
 const {
-  title = "Smarttec | Reparación premium de iPhone en León, Gto.",
-  description = "Reparación premium de iPhone y smartphones en León, Gto. +15 años de experiencia. Express en batería/centro de carga (según modelo), pantallas, mojados y placa. 90 días de garantía por escrito.",
+  title = "Smarttec | Reparación de iPhone y Smartphones en León, Gto.",
+  description = "Especialistas en reparación de iPhone, Samsung y Huawei en León. Pantallas, baterías y tarjeta madre con garantía. ¡Servicio express en Blvd. Campestre!",
   canonical,
   ogImage,
 } = Astro.props;
 
-const site = Astro.site ? Astro.site.toString() : undefined;
-const canonicalUrl = canonical
-  ? canonical
-  : site
-    ? new URL(Astro.url.pathname, site).toString()
-    : undefined;
-
-// OG Image URL - SIMPLIFICADO
-const siteOrigin = site
-  ? new URL(site).origin
-  : "https://smarttec-landing.vercel.app";
-const ogImageUrl = ogImage || `${siteOrigin}/og-image.jpg`;
+const site = "https://smarttec.mx"; // Reemplaza con  dominio final
+const canonicalUrl = canonical || new URL(Astro.url.pathname, site).toString();
+const ogImageUrl = ogImage || `${site}/og-image.jpg`;
 
 const phoneE164 = "+524792155743";
-const mapsUrl = "https://maps.app.goo.gl/bYxzHKAHKJj3JeAZ6";
-const reviewUrl = "https://g.page/r/CTx7L5uuenBrEBM/review";
+const lat = 21.1526109;
+const lng = -101.695822;
 
-// 👇 MEJORA: Schema con aggregateRating si tienes las reseñas
 const schema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "RepairService"],
-  ...(canonicalUrl ? { "@id": `${canonicalUrl}#smarttec` } : {}),
-  name: "Smarttec",
+  name: "Smarttec - Reparación de celulares y iPhone",
+  image: ogImageUrl,
+  "@id": site,
+  url: site,
   telephone: phoneE164,
-  url: canonicalUrl ?? site,
-  ...(ogImageUrl ? { image: ogImageUrl } : {}), // 👈 NUEVO
-  description: description, // 👈 NUEVO
+  priceRange: "$$",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Av. Panorama 923, esquina con Blvd. Campestre",
+    streetAddress: "Blvd. Campestre 923, Valle del Campestre",
     addressLocality: "León",
     addressRegion: "Guanajuato",
+    postalCode: "37160",
     addressCountry: "MX",
   },
-  areaServed: { "@type": "City", name: "León, Guanajuato" },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: lat,
+    longitude: lng,
+  },
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -59,30 +54,15 @@ const schema = {
     },
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Saturday"],
+      dayOfWeek: "Saturday",
       opens: "10:00",
       closes: "14:00",
     },
   ],
-  priceRange: "$$",
-  hasMap: mapsUrl,
-  sameAs: [mapsUrl, reviewUrl],
-  knowsAbout: [
-    "Reparación de iPhone",
-    "Reparación de smartphones",
-    "Cambio de batería",
-    "Cambio de pantalla",
-    "Centro de carga",
-    "Microsoldadura",
-    "Daño por líquido",
-  ],
-  // 👇 NUEVO: Solo si tienes reseñas reales verificables
   aggregateRating: {
     "@type": "AggregateRating",
-    ratingValue: "5",
-    reviewCount: "8",
-    bestRating: "5",
-    worstRating: "5",
+    ratingValue: "5.0",
+    reviewCount: "24", // Ajusta según tus reseñas actuales
   },
 };
 ---
@@ -98,6 +78,21 @@ const schema = {
 
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
 
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 

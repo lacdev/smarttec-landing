@@ -295,14 +295,14 @@ const faqs = [
     <button
       id="navBackdrop"
       type="button"
-      class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-200"
+      class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-120"
       aria-label="Cerrar menú"></button>
 
     <aside
       id="mobileNavPanel"
       class="absolute right-4 top-4 w-[min(92vw,360px)] rounded-3xl border border-[color:var(--color-border)]
              bg-[color:var(--color-card)] shadow-2xl backdrop-blur-sm
-             opacity-0 scale-[0.98] translate-y-1 transition-[opacity,transform] duration-200 ease-out"
+             opacity-0 scale-[0.98] translate-y-1 transition-[opacity,transform] duration-120 ease-out"
       role="dialog"
       aria-modal="true"
       aria-label="Menú"
@@ -1324,7 +1324,7 @@ const faqs = [
         menu.classList.add("hidden");
         if (lastFocused && typeof lastFocused.focus === "function")
           lastFocused.focus();
-      }, 220);
+      }, 120);
     };
 
     toggle.addEventListener("click", () => {

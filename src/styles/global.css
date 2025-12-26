@@ -157,6 +157,7 @@
     transform: translateZ(0);
 
     animation: aurora-cloud 18s ease-in-out infinite alternate;
+    animation-play-state: running;
   }
 
   body::after {
@@ -196,27 +197,6 @@
   body > * {
     position: relative;
     z-index: 1;
-  }
-
-  html.theme-transition body,
-  html.theme-transition header,
-  html.theme-transition main,
-  html.theme-transition footer,
-  html.theme-transition section,
-  html.theme-transition a,
-  html.theme-transition button,
-  html.theme-transition div,
-  html.theme-transition p,
-  html.theme-transition h1,
-  html.theme-transition h2,
-  html.theme-transition ul,
-  html.theme-transition li {
-    transition:
-      background-color 180ms ease,
-      color 180ms ease,
-      border-color 180ms ease,
-      fill 180ms ease,
-      stroke 180ms ease;
   }
 
   :where(a):focus-visible {
@@ -805,5 +785,24 @@
     box-shadow:
       0 0 0 2px color-mix(in oklab, var(--color-bg) 75%, transparent),
       0 0 0 6px color-mix(in oklab, var(--color-accent) 28%, transparent);
+  }
+}
+
+::view-transition-old(root) {
+  animation: 150ms ease-out both fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 250ms ease-in both blur-in;
+}
+
+@keyframes blur-in {
+  from {
+    filter: blur(1px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
   }
 }

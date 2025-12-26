@@ -218,25 +218,22 @@ const schema = {
 
         const handleToggle = () => {
           const root = document.documentElement;
+          const isDark = !root.classList.contains("dark");
 
-          root.classList.add("theme-transition");
-
-          const isDark = root.classList.toggle("dark");
-          localStorage.setItem(key, isDark ? "dark" : "light");
-
-          syncThemeIcon();
-
-          window.setTimeout(
-            () => root.classList.remove("theme-transition"),
-            220,
-          );
+          // Si el browser soporta View Transitions API
+          if (document.startViewTransition) {
+            document.startViewTransition(() => {
+              root.classList.toggle("dark");
+              localStorage.setItem(key, isDark ? "dark" : "light");
+              syncThemeIcon();
+            });
+          } else {
+            // Fallback instantáneo
+            root.classList.toggle("dark");
+            localStorage.setItem(key, isDark ? "dark" : "light");
+            syncThemeIcon();
+          }
         };
-
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", syncThemeIcon);
-        } else {
-          syncThemeIcon();
-        }
 
         document.addEventListener("click", (e) => {
           const target = e.target;

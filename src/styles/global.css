@@ -2,15 +2,14 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg: #f4f2ee; /* pearl */
-  --color-fg: #0b0f14; /* near-black base */
+  --color-bg: #f4f2ee;
+  --color-fg: #0b0f14;
   --color-accent: #2da8ff;
 
-  /* Keep tokens but pivot aurora to BLUE -> PURPLE (no green) */
   --color-aurora-blue-1: #2da8ff;
-  --color-aurora-blue-2: #3b82f6; /* blue-500 */
-  --color-aurora-purple-1: #8b5cf6; /* violet-500 */
-  --color-aurora-purple-2: #a78bfa; /* violet-400 */
+  --color-aurora-blue-2: #3b82f6;
+  --color-aurora-purple-1: #8b5cf6;
+  --color-aurora-purple-2: #a78bfa;
 
   --color-ink: color-mix(in oklab, var(--color-fg) 92%, #ffffff);
   --color-subtle: color-mix(in oklab, var(--color-fg) 62%, var(--color-bg));
@@ -30,7 +29,6 @@
   --color-border: color-mix(in oklab, var(--color-fg) 14%, var(--color-bg));
 }
 
-/* Button tokens (light) */
 :root {
   --btn-primary-bg: color-mix(in oklab, var(--color-accent) 92%, #ffffff);
   --btn-primary-bg-hover: color-mix(in oklab, var(--color-accent) 86%, #ffffff);
@@ -59,7 +57,6 @@
     color-mix(in oklab, var(--color-accent) 30%, transparent);
 }
 
-/* Button tokens (dark) */
 :root.dark {
   --btn-primary-bg: color-mix(in oklab, var(--color-accent) 80%, #0b0f14);
   --btn-primary-bg-hover: color-mix(in oklab, var(--color-accent) 88%, #0b0f14);
@@ -113,7 +110,6 @@
     background: var(--color-bg);
   }
 
-  /* Aurora global (animated “cloud” behind everything, blue -> purple) */
   body::before {
     content: "";
     position: fixed;
@@ -121,11 +117,9 @@
     pointer-events: none;
     z-index: 0;
 
-    /* Slightly more present than before, still sleek */
     filter: blur(92px) saturate(1.25);
     opacity: 0.92;
 
-    /* Four blobs, all blue/purple — no green */
     background:
       radial-gradient(
         980px 640px at 14% 12%,
@@ -162,11 +156,9 @@
 
     transform: translateZ(0);
 
-    /* “Nube” suave: sólo mueve posiciones (sin rotaciones raras) */
     animation: aurora-cloud 18s ease-in-out infinite alternate;
   }
 
-  /* Grid sutil (igual que ahora) */
   body::after {
     content: "";
     position: fixed;
@@ -193,7 +185,6 @@
     transform: translateZ(0);
   }
 
-  /* Dark mode: keep visible, slightly less opacity + deeper blur */
   :root.dark body::before {
     opacity: 0.68;
     filter: blur(104px) saturate(1.18);
@@ -237,7 +228,6 @@
   }
 }
 
-/* Aurora animation keyframes */
 @keyframes aurora-cloud {
   0% {
     background-position:
@@ -340,7 +330,6 @@
     position: relative;
   }
 
-  /* iPhone (unchanged from your current) */
   .iphone-container {
     background: transparent;
     border: 0;
@@ -529,7 +518,6 @@
   }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .btn-primary,
   .btn-secondary,
@@ -559,9 +547,16 @@
     opacity: 1 !important;
     transform: none !important;
   }
+
+  .faq-answer {
+    transition: none !important;
+  }
+
+  .faq-icon {
+    transition: none !important;
+  }
 }
 
-/* Mobile menu links */
 @layer components {
   .nav-link {
     display: block;
@@ -586,7 +581,6 @@
   }
 }
 
-/* Reviews marquee */
 @layer components {
   .reviews-marquee {
     position: relative;
@@ -667,7 +661,6 @@
   }
 }
 
-/* Brands marquee */
 @layer components {
   .brands-marquee {
     position: relative;
@@ -740,5 +733,77 @@
   .brand-logo svg {
     width: 64px;
     height: 64px;
+  }
+}
+
+/* FAQ Accordion Styles */
+@layer components {
+  .faq-item {
+    transition:
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .faq-button {
+    cursor: pointer;
+  }
+
+  .faq-button:hover {
+    background: color-mix(in oklab, var(--color-card) 95%, var(--color-accent));
+  }
+
+  .faq-button:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px color-mix(in oklab, var(--color-bg) 75%, transparent),
+      0 0 0 6px color-mix(in oklab, var(--color-accent) 28%, transparent);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease-in-out;
+  }
+
+  .faq-icon {
+    transition: transform 300ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .faq-item:hover {
+      border-color: color-mix(
+        in oklab,
+        var(--color-accent) 25%,
+        var(--color-border)
+      );
+    }
+  }
+}
+
+/* Social Icons */
+@layer components {
+  .social-icon {
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease,
+      background-color 180ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .social-icon:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .social-icon:active {
+    transform: translateY(0px) scale(0.95);
+  }
+
+  .social-icon:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px color-mix(in oklab, var(--color-bg) 75%, transparent),
+      0 0 0 6px color-mix(in oklab, var(--color-accent) 28%, transparent);
   }
 }

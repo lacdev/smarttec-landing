@@ -5,7 +5,7 @@ import robots from "astro-robots";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://smarttec-landing.vercel.app",
+  site: "https://smarttec.mx",
   output: "static",
 
   trailingSlash: "never",

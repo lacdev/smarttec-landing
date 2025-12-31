@@ -70,6 +70,25 @@ const schema = {
 <!doctype html>
 <html lang="es-MX">
   <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        const wAny = w as any;
+        wAny[l] = wAny[l] || [];
+        wAny[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0] as Element | null,
+          j = d.createElement(s) as HTMLScriptElement,
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        if (f && f.parentNode) {
+          f.parentNode.insertBefore(j, f);
+        } else {
+          d.head?.appendChild(j);
+        }
+      })(window, document, "script", "dataLayer", "GTM-T79WX4N5");
+    </script>
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -178,6 +197,15 @@ const schema = {
   </head>
 
   <body class="min-h-dvh antialiased">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-T79WX4N5"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[9999] focus:rounded-xl focus:bg-[color:var(--color-bg)] focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-[color:var(--color-ink)] focus:shadow-lg"

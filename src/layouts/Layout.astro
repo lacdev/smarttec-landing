@@ -1,70 +1,70 @@
 ---
-import "../styles/global.css";
+import '../styles/global.css'
 
 type Props = {
-  title?: string;
-  description?: string;
-  canonical?: string;
-  ogImage?: string;
-};
+  title?: string
+  description?: string
+  canonical?: string
+  ogImage?: string
+}
 
 const {
-  title = "Smarttec | Reparación de iPhone y Smartphones en León, Gto.",
-  description = "Especialistas en reparación de iPhone, Samsung y Huawei en León. Pantallas, baterías y tarjeta madre con garantía. ¡Servicio express en Blvd. Campestre!",
+  title = 'Smarttec | Reparación de iPhone y Smartphones en León, Gto.',
+  description = 'Especialistas en reparación de iPhone, Samsung y Huawei en León. Pantallas, baterías y tarjeta madre con garantía. ¡Servicio express en Blvd. Campestre!',
   canonical,
   ogImage,
-} = Astro.props;
+} = Astro.props
 
-const site = "https://smarttec.mx"; // Reemplaza con  dominio final
-const canonicalUrl = canonical || new URL(Astro.url.pathname, site).toString();
-const ogImageUrl = ogImage || `${site}/og-image.jpg`;
+const site = 'https://smarttec.mx' // Reemplaza con  dominio final
+const canonicalUrl = canonical || new URL(Astro.url.pathname, site).toString()
+const ogImageUrl = ogImage || `${site}/og-image.jpg`
 
-const phoneE164 = "+524792155743";
-const lat = 21.1526109;
-const lng = -101.695822;
+const phoneE164 = '+524792155743'
+const lat = 21.1526109
+const lng = -101.695822
 
 const schema = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "RepairService"],
-  name: "Smarttec - Reparación de celulares y iPhone",
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'RepairService'],
+  name: 'Smarttec - Reparación de celulares y iPhone',
   image: ogImageUrl,
-  "@id": site,
+  '@id': site,
   url: site,
   telephone: phoneE164,
-  priceRange: "$$",
+  priceRange: '$$',
   address: {
-    "@type": "PostalAddress",
-    streetAddress: "Blvd. Campestre 923, Valle del Campestre",
-    addressLocality: "León",
-    addressRegion: "Guanajuato",
-    postalCode: "37160",
-    addressCountry: "MX",
+    '@type': 'PostalAddress',
+    streetAddress: 'Blvd. Campestre 923, Valle del Campestre',
+    addressLocality: 'León',
+    addressRegion: 'Guanajuato',
+    postalCode: '37160',
+    addressCountry: 'MX',
   },
   geo: {
-    "@type": "GeoCoordinates",
+    '@type': 'GeoCoordinates',
     latitude: lat,
     longitude: lng,
   },
   openingHoursSpecification: [
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "10:00",
-      closes: "19:00",
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '10:00',
+      closes: '19:00',
     },
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Saturday",
-      opens: "10:00",
-      closes: "14:00",
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '10:00',
+      closes: '14:00',
     },
   ],
   aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: "24", // Ajusta según tus reseñas actuales
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '24', // Ajusta según tus reseñas actuales
   },
-};
+}
 ---
 
 <!doctype html>
@@ -72,28 +72,25 @@ const schema = {
   <head>
     <!-- Google Tag Manager -->
     <script>
-      (function (w, d, s, l, i) {
-        const wAny = w as any;
-        wAny[l] = wAny[l] || [];
-        wAny[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0] as Element | null,
+      ;(function (w, d, s, l, i) {
+        const wData = w as unknown as { [key: string]: object[] }
+        wData[l] = wData[l] || []
+        wData[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+        const f = d.getElementsByTagName(s)[0] as Element | null,
           j = d.createElement(s) as HTMLScriptElement,
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          dl = l != 'dataLayer' ? '&l=' + l : ''
+        j.async = true
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
         if (f && f.parentNode) {
-          f.parentNode.insertBefore(j, f);
+          f.parentNode.insertBefore(j, f)
         } else {
-          d.head?.appendChild(j);
+          d.head?.appendChild(j)
         }
-      })(window, document, "script", "dataLayer", "GTM-T79WX4N5");
+      })(window, document, 'script', 'dataLayer', 'GTM-T79WX4N5')
     </script>
     <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -118,7 +115,7 @@ const schema = {
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <link rel="alternate" hreflang="es-MX" href={canonicalUrl ?? site ?? "/"} />
+    <link rel="alternate" hreflang="es-MX" href={canonicalUrl ?? site ?? '/'} />
 
     <!-- 👇 MEJORADO: Open Graph con imagen -->
     <meta property="og:type" content="website" />
@@ -130,32 +127,18 @@ const schema = {
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="Smarttec - Reparación premium de iPhone en León"
-    />
+    <meta property="og:image:alt" content="Smarttec - Reparación premium de iPhone en León" />
 
     <!-- 👇 MEJORADO: Twitter Card con imagen -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
-    <meta
-      name="twitter:image:alt"
-      content="Smarttec - Reparación premium de iPhone en León"
-    />
+    <meta name="twitter:image:alt" content="Smarttec - Reparación premium de iPhone en León" />
 
     <meta name="color-scheme" content="light dark" />
-    <meta
-      name="theme-color"
-      content="#f4f2ee"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#0b0f14"
-      media="(prefers-color-scheme: dark)"
-    />
+    <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
 
     <link rel="preconnect" href="https://www.google.com" />
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
@@ -168,31 +151,29 @@ const schema = {
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
     <script is:inline>
-      (() => {
-        const key = "smarttec-theme";
-        const root = document.documentElement;
+      ;(() => {
+        const key = 'smarttec-theme'
+        const root = document.documentElement
 
-        const saved = localStorage.getItem(key);
-        const hasOverride = saved === "dark" || saved === "light";
+        const saved = localStorage.getItem(key)
+        const hasOverride = saved === 'dark' || saved === 'light'
 
         const apply = (mode) => {
-          if (mode === "dark") root.classList.add("dark");
-          else root.classList.remove("dark");
-        };
+          if (mode === 'dark') root.classList.add('dark')
+          else root.classList.remove('dark')
+        }
 
-        const mq = window.matchMedia
-          ? window.matchMedia("(prefers-color-scheme: dark)")
-          : null;
-        const prefersDark = mq ? mq.matches : false;
+        const mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null
+        const prefersDark = mq ? mq.matches : false
 
-        apply(hasOverride ? saved : prefersDark ? "dark" : "light");
+        apply(hasOverride ? saved : prefersDark ? 'dark' : 'light')
 
         if (!hasOverride && mq) {
-          const onChange = (e) => apply(e.matches ? "dark" : "light");
-          if (mq.addEventListener) mq.addEventListener("change", onChange);
-          else mq.addListener?.(onChange);
+          const onChange = (e) => apply(e.matches ? 'dark' : 'light')
+          if (mq.addEventListener) mq.addEventListener('change', onChange)
+          else mq.addListener?.(onChange)
         }
-      })();
+      })()
     </script>
   </head>
 
@@ -216,58 +197,58 @@ const schema = {
     <slot />
 
     <script is:inline>
-      (() => {
-        const key = "smarttec-theme";
+      ;(() => {
+        const key = 'smarttec-theme'
 
         const syncThemeIcon = () => {
-          const btn = document.getElementById("themeToggle");
-          if (!btn) return;
+          const btn = document.getElementById('themeToggle')
+          if (!btn) return
 
-          const moon = btn.querySelector('[data-theme-icon="moon"]');
-          const sun = btn.querySelector('[data-theme-icon="sun"]');
-          if (!(moon instanceof Element) || !(sun instanceof Element)) return;
+          const moon = btn.querySelector('[data-theme-icon="moon"]')
+          const sun = btn.querySelector('[data-theme-icon="sun"]')
+          if (!(moon instanceof Element) || !(sun instanceof Element)) return
 
-          const root = document.documentElement;
-          const isDark = root.classList.contains("dark");
+          const root = document.documentElement
+          const isDark = root.classList.contains('dark')
 
           if (isDark) {
-            sun.classList.remove("hidden");
-            moon.classList.add("hidden");
+            sun.classList.remove('hidden')
+            moon.classList.add('hidden')
           } else {
-            moon.classList.remove("hidden");
-            sun.classList.add("hidden");
+            moon.classList.remove('hidden')
+            sun.classList.add('hidden')
           }
-        };
+        }
 
         const handleToggle = () => {
-          const root = document.documentElement;
-          const isDark = !root.classList.contains("dark");
+          const root = document.documentElement
+          const isDark = !root.classList.contains('dark')
 
           // Si el browser soporta View Transitions API
           if (document.startViewTransition) {
             document.startViewTransition(() => {
-              root.classList.toggle("dark");
-              localStorage.setItem(key, isDark ? "dark" : "light");
-              syncThemeIcon();
-            });
+              root.classList.toggle('dark')
+              localStorage.setItem(key, isDark ? 'dark' : 'light')
+              syncThemeIcon()
+            })
           } else {
             // Fallback instantáneo
-            root.classList.toggle("dark");
-            localStorage.setItem(key, isDark ? "dark" : "light");
-            syncThemeIcon();
+            root.classList.toggle('dark')
+            localStorage.setItem(key, isDark ? 'dark' : 'light')
+            syncThemeIcon()
           }
-        };
+        }
 
-        document.addEventListener("click", (e) => {
-          const target = e.target;
-          if (!(target instanceof Element)) return;
+        document.addEventListener('click', (e) => {
+          const target = e.target
+          if (!(target instanceof Element)) return
 
-          const btn = target.closest("#themeToggle");
-          if (!btn) return;
+          const btn = target.closest('#themeToggle')
+          if (!btn) return
 
-          handleToggle();
-        });
-      })();
+          handleToggle()
+        })
+      })()
     </script>
   </body>
 </html>

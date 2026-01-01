@@ -1,18 +1,13 @@
 ---
-import { siWhatsapp } from "simple-icons/icons";
+import { siWhatsapp } from 'simple-icons/icons'
 
 interface Props {
-  class?: string;
+  class?: string
 }
 
-const { class: className = "h-5 w-5" } = Astro.props;
+const { class: className = 'h-5 w-5' } = Astro.props
 ---
 
-<svg
-  class={className}
-  viewBox="0 0 24 24"
-  fill="currentColor"
-  aria-hidden="true"
->
+<svg class={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
   <path d={siWhatsapp.path}></path>
 </svg>

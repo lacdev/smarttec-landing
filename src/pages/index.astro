@@ -1,49 +1,48 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
+import Layout from '../layouts/Layout.astro'
+import { Image } from 'astro:assets'
 
-import image2 from "../assets/image2.png";
-import image4 from "../assets/image4.png";
+import image2 from '../assets/image2.png'
+import image4 from '../assets/image4.png'
 
 // Process Icons
-import MessageCircle from "@lucide/astro/icons/message-circle";
-import Microscope from "@lucide/astro/icons/microscope";
-import ListCheck from "@lucide/astro/icons/list-check";
-import Wrench from "@lucide/astro/icons/wrench";
-import ShieldCheck from "@lucide/astro/icons/shield-check";
+import MessageCircle from '@lucide/astro/icons/message-circle'
+import Microscope from '@lucide/astro/icons/microscope'
+import ListCheck from '@lucide/astro/icons/list-check'
+import Wrench from '@lucide/astro/icons/wrench'
+import ShieldCheck from '@lucide/astro/icons/shield-check'
 
 // Services Icons
-import BatteryCharging from "@lucide/astro/icons/battery-charging";
-import Smartphone from "@lucide/astro/icons/smartphone";
-import Usb from "@lucide/astro/icons/usb";
-import Volume2 from "@lucide/astro/icons/volume-2";
-import Camera from "@lucide/astro/icons/camera";
-import ToggleLeft from "@lucide/astro/icons/toggle-left";
-import Droplets from "@lucide/astro/icons/droplets";
-import Power from "@lucide/astro/icons/power";
-import CircuitBoard from "@lucide/astro/icons/circuit-board";
-import TabletSmartphone from "@lucide/astro/icons/tablet-smartphone";
+import BatteryCharging from '@lucide/astro/icons/battery-charging'
+import Smartphone from '@lucide/astro/icons/smartphone'
+import Usb from '@lucide/astro/icons/usb'
+import Volume2 from '@lucide/astro/icons/volume-2'
+import Camera from '@lucide/astro/icons/camera'
+import ToggleLeft from '@lucide/astro/icons/toggle-left'
+import Droplets from '@lucide/astro/icons/droplets'
+import Power from '@lucide/astro/icons/power'
+import CircuitBoard from '@lucide/astro/icons/circuit-board'
+import TabletSmartphone from '@lucide/astro/icons/tablet-smartphone'
 
 // CTA Icons
-import PhoneCall from "@lucide/astro/icons/phone-call";
-import MapPin from "@lucide/astro/icons/map-pin";
-import ChevronDown from "@lucide/astro/icons/chevron-down";
+import PhoneCall from '@lucide/astro/icons/phone-call'
+import MapPin from '@lucide/astro/icons/map-pin'
+import ChevronDown from '@lucide/astro/icons/chevron-down'
 
 // Theme Icons
-import Moon from "@lucide/astro/icons/moon";
-import Sun from "@lucide/astro/icons/sun";
+import Moon from '@lucide/astro/icons/moon'
+import Sun from '@lucide/astro/icons/sun'
 
-const phone = "+52 479 215 5743";
-const telHref = "tel:+524792155743";
-const mapsHref =
-  "https://www.google.com/maps/search/?api=1&query=Smarttec+Blvd+Campestre+923+Leon+Gto";
+const phone = '+52 479 215 5743'
+const telHref = 'tel:+524792155743'
+const mapsHref = 'https://www.google.com/maps/search/?api=1&query=Smarttec+Blvd+Campestre+923+Leon+Gto'
 
 const waText = encodeURIComponent(
-  "Hola Smarttec, quiero cotizar. Origen: Sitio web. Modelo: _____ Falla: _____ ¿Prende?: _____ ¿Se mojó o recibió golpe?: _____ (Adjunto foto/video).",
-);
-const waHref = `https://wa.me/524792155743?text=${waText}`;
+  'Hola Smarttec, quiero cotizar. Origen: Sitio web. Modelo: _____ Falla: _____ ¿Prende?: _____ ¿Se mojó o recibió golpe?: _____ (Adjunto foto/video).'
+)
+const waHref = `https://wa.me/524792155743?text=${waText}`
 
-const reviewHref = "https://g.page/r/CTx7L5uuenBrEBM/review";
+const reviewHref = 'https://g.page/r/CTx7L5uuenBrEBM/review'
 
 import {
   siApple,
@@ -60,113 +59,113 @@ import {
   siFacebook,
   siInstagram,
   siTiktok,
-} from "simple-icons/icons";
+} from 'simple-icons/icons'
 
-import WhatsAppIcon from "../components/WhatsAppIcon.astro";
+import WhatsAppIcon from '../components/WhatsAppIcon.astro'
 
 const brands = [
-  [siApple, "Apple"],
-  [siSamsung, "Samsung"],
-  [siMotorola, "Motorola"],
-  [siGoogle, "Google Pixel"],
-  [siHuawei, "Huawei"],
-  [siXiaomi, "Xiaomi"],
-  [siLenovo, "Lenovo"],
-  [siOneplus, "OnePlus"],
-  [siOppo, "OPPO"],
-  [siVivo, "Vivo"],
-  [siHonor, "Honor"],
-];
+  [siApple, 'Apple'],
+  [siSamsung, 'Samsung'],
+  [siMotorola, 'Motorola'],
+  [siGoogle, 'Google Pixel'],
+  [siHuawei, 'Huawei'],
+  [siXiaomi, 'Xiaomi'],
+  [siLenovo, 'Lenovo'],
+  [siOneplus, 'OnePlus'],
+  [siOppo, 'OPPO'],
+  [siVivo, 'Vivo'],
+  [siHonor, 'Honor'],
+]
 
-const brandSvg = (icon: any) => `
+const brandSvg = (icon: typeof siApple) => `
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="h-9 w-9 sm:h-10 sm:w-10">
     <path d="${icon.path}" fill="currentColor"></path>
   </svg>
-`;
+`
 
-const socialIcon = (icon: any) => `
+const socialIcon = (icon: typeof siApple) => `
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="h-5 w-5">
     <path d="${icon.path}" fill="currentColor"></path>
   </svg>
-`;
+`
 
 const reviews = [
   {
-    name: "Mariana R.",
-    when: "Hace 2 semanas",
-    text: "Excelente servicio. Me cambiaron la batería y quedó como nuevo. Me explicaron todo y me dieron garantía por escrito.",
+    name: 'Mariana R.',
+    when: 'Hace 2 semanas',
+    text: 'Excelente servicio. Me cambiaron la batería y quedó como nuevo. Me explicaron todo y me dieron garantía por escrito.',
   },
   {
-    name: "Luis A.",
-    when: "Hace 1 mes",
-    text: "Muy profesionales. Diagnosticaron rápido y me dieron opciones de calidad y precio. Cero sorpresas al final.",
+    name: 'Luis A.',
+    when: 'Hace 1 mes',
+    text: 'Muy profesionales. Diagnosticaron rápido y me dieron opciones de calidad y precio. Cero sorpresas al final.',
   },
   {
-    name: "Fer G.",
-    when: "Hace 3 semanas",
-    text: "Reparación de centro de carga en el mismo día. Súper buena atención y el proceso muy transparente.",
+    name: 'Fer G.',
+    when: 'Hace 3 semanas',
+    text: 'Reparación de centro de carga en el mismo día. Súper buena atención y el proceso muy transparente.',
   },
   {
-    name: "Jorge M.",
-    when: "Hace 2 meses",
-    text: "Me dio confianza que hicieron checklist y pruebas al entregar. La pantalla quedó perfecta.",
+    name: 'Jorge M.',
+    when: 'Hace 2 meses',
+    text: 'Me dio confianza que hicieron checklist y pruebas al entregar. La pantalla quedó perfecta.',
   },
   {
-    name: "Ana P.",
-    when: "Hace 1 semana",
-    text: "Atención premium. Me explicaron qué se iba a cambiar y por qué. Recomendadísimos en León.",
+    name: 'Ana P.',
+    when: 'Hace 1 semana',
+    text: 'Atención premium. Me explicaron qué se iba a cambiar y por qué. Recomendadísimos en León.',
   },
   {
-    name: "Karla S.",
-    when: "Hace 3 meses",
-    text: "Tuve un iPhone mojado y me atendieron rápido. Me salvaron la información. Trato muy amable.",
+    name: 'Karla S.',
+    when: 'Hace 3 meses',
+    text: 'Tuve un iPhone mojado y me atendieron rápido. Me salvaron la información. Trato muy amable.',
   },
   {
-    name: "Diego C.",
-    when: "Hace 5 semanas",
-    text: "Buen precio para la calidad. Me gustó que respetan tiempos y te mantienen al tanto.",
+    name: 'Diego C.',
+    when: 'Hace 5 semanas',
+    text: 'Buen precio para la calidad. Me gustó que respetan tiempos y te mantienen al tanto.',
   },
   {
-    name: "Sofía L.",
-    when: "Hace 2 meses",
-    text: "Todo claro desde el inicio: diagnóstico, opciones y garantía. Muy buena experiencia.",
+    name: 'Sofía L.',
+    when: 'Hace 2 meses',
+    text: 'Todo claro desde el inicio: diagnóstico, opciones y garantía. Muy buena experiencia.',
   },
-];
+]
 
 const faqs = [
   {
-    q: "¿Cuánto tarda la reparación?",
-    a: "Express (batería/carga): 1-2 hrs. Pantalla: 2-4 hrs según modelo. Otros: Te damos estimado en el diagnóstico.",
+    q: '¿Cuánto tarda la reparación?',
+    a: 'Express (batería/carga): 1-2 hrs. Pantalla: 2-4 hrs según modelo. Otros: Te damos estimado en el diagnóstico.',
   },
   {
-    q: "¿Pierdo mi información?",
-    a: "NO tocamos tus datos. Solo el hardware. De todos modos, siempre recomendamos respaldar tu información antes.",
+    q: '¿Pierdo mi información?',
+    a: 'NO tocamos tus datos. Solo el hardware. De todos modos, siempre recomendamos respaldar tu información antes.',
   },
   {
-    q: "¿La garantía aplica en serio?",
-    a: "90 días por escrito (en la mayoría de reparaciones). Sin letra chica. Si falla lo mismo, lo arreglamos sin costo.",
+    q: '¿La garantía aplica en serio?',
+    a: '90 días por escrito (en la mayoría de reparaciones). Sin letra chica. Si falla lo mismo, lo arreglamos sin costo.',
   },
   {
-    q: "¿Puedo esperar mientras reparan mi teléfono?",
-    a: "Sí, en reparaciones express (batería/centro de carga) puedes esperar. En otras te avisamos cuando esté listo por WhatsApp.",
+    q: '¿Puedo esperar mientras reparan mi teléfono?',
+    a: 'Sí, en reparaciones express (batería/centro de carga) puedes esperar. En otras te avisamos cuando esté listo por WhatsApp.',
   },
   {
-    q: "¿Trabajan con todas las marcas?",
-    a: "iPhone es nuestra especialidad (15+ años). También Samsung, Xiaomi, Huawei, Motorola, etc.",
+    q: '¿Trabajan con todas las marcas?',
+    a: 'iPhone es nuestra especialidad (15+ años). También Samsung, Xiaomi, Huawei, Motorola, etc.',
   },
   {
-    q: "¿Puedo ver el proceso?",
-    a: "En reparaciones express, sí, frente a ti. En otras, te mandamos fotos por WhatsApp o te mantenemos informado.",
+    q: '¿Puedo ver el proceso?',
+    a: 'En reparaciones express, sí, frente a ti. En otras, te mandamos fotos por WhatsApp o te mantenemos informado.',
   },
   {
-    q: "¿Necesito cita o puedo llegar directo?",
-    a: "Puedes llegar directo, pero si nos mandas WhatsApp antes, podemos tener todo listo cuando llegues y ahorrarte tiempo.",
+    q: '¿Necesito cita o puedo llegar directo?',
+    a: 'Puedes llegar directo, pero si nos mandas WhatsApp antes, podemos tener todo listo cuando llegues y ahorrarte tiempo.',
   },
   {
-    q: "¿Qué pasa si no tiene solución?",
-    a: "Te lo decimos honestamente. No inventamos reparaciones innecesarias ni te hacemos perder el tiempo.",
+    q: '¿Qué pasa si no tiene solución?',
+    a: 'Te lo decimos honestamente. No inventamos reparaciones innecesarias ni te hacemos perder el tiempo.',
   },
-];
+]
 ---
 
 <Layout
@@ -177,29 +176,18 @@ const faqs = [
   <header
     class="sticky top-0 z-50 border-b border-[color:var(--color-border)] bg-[color:var(--color-bg)]/80 backdrop-blur"
   >
-    <div
-      class="mx-auto flex max-w-[1100px] items-center justify-between gap-3 px-4 py-3"
-    >
-      <a
-        href="#top"
-        class="flex items-center gap-2"
-        aria-label="Smarttec, ir al inicio"
-      >
+    <div class="mx-auto flex max-w-[1100px] items-center justify-between gap-3 px-4 py-3">
+      <a href="#top" class="flex items-center gap-2" aria-label="Smarttec, ir al inicio">
         <span
           aria-hidden="true"
           class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[color:var(--color-fg)] text-[color:var(--color-bg)]"
         >
           <span class="text-sm font-semibold">S</span>
         </span>
-        <span class="hidden sm:inline text-sm font-semibold tracking-tight"
-          >Smarttec</span
-        >
+        <span class="hidden sm:inline text-sm font-semibold tracking-tight">Smarttec</span>
       </a>
 
-      <nav
-        class="hidden items-center gap-6 lg:flex"
-        aria-label="Navegación principal"
-      >
+      <nav class="hidden items-center gap-6 lg:flex" aria-label="Navegación principal">
         <a
           href="#top"
           class="text-sm font-semibold text-[color:var(--color-subtle)] hover:text-[color:var(--color-ink)] transition-colors"
@@ -233,11 +221,7 @@ const faqs = [
           class="btn-primary inline-flex h-10 items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold sm:px-5 sm:gap-3"
           aria-label="Cotizar por WhatsApp"
         >
-          <WhatsAppIcon
-            class="h-5 w-5 shrink-0 -mt-px"
-            stroke-width="2.25"
-            aria-hidden="true"
-          />
+          <WhatsAppIcon class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
           <span class="sm:hidden">Cotizar</span>
           <span class="hidden sm:inline">Cotizar por WhatsApp</span>
         </a>
@@ -248,18 +232,8 @@ const faqs = [
           class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-border)]"
           aria-label="Cambiar modo claro/oscuro"
         >
-          <Moon
-            data-theme-icon="moon"
-            class="h-5 w-5"
-            stroke-width="2.25"
-            aria-hidden="true"
-          />
-          <Sun
-            data-theme-icon="sun"
-            class="hidden h-5 w-5"
-            stroke-width="2.25"
-            aria-hidden="true"
-          />
+          <Moon data-theme-icon="moon" class="h-5 w-5" stroke-width="2.25" aria-hidden="true" />
+          <Sun data-theme-icon="sun" class="hidden h-5 w-5" stroke-width="2.25" aria-hidden="true" />
         </button>
 
         <button
@@ -288,11 +262,7 @@ const faqs = [
   </header>
 
   <!-- MOBILE MODAL -->
-  <div
-    id="mobileNav"
-    class="fixed inset-0 z-[60] hidden lg:hidden"
-    aria-hidden="true"
-  >
+  <div id="mobileNav" class="fixed inset-0 z-[60] hidden lg:hidden" aria-hidden="true">
     <button
       id="navBackdrop"
       type="button"
@@ -309,9 +279,7 @@ const faqs = [
       aria-label="Menú"
       tabindex="-1"
     >
-      <div
-        class="flex items-center justify-between border-b border-[color:var(--color-border)] px-5 py-4"
-      >
+      <div class="flex items-center justify-between border-b border-[color:var(--color-border)] px-5 py-4">
         <p class="text-sm font-semibold">Menú</p>
         <button
           id="navClose"
@@ -379,42 +347,31 @@ const faqs = [
               Reparación de iPhone y Smartphone premium en León, Guanajuato.
             </p>
 
-            <h1
-              class="mt-5 text-balance text-5xl font-semibold tracking-tight leading-[1.02] sm:text-6xl lg:text-7xl"
-            >
+            <h1 class="mt-5 text-balance text-5xl font-semibold tracking-tight leading-[1.02] sm:text-6xl lg:text-7xl">
               Tu teléfono, como nuevo.
             </h1>
 
             <p
               class="mx-auto mt-5 max-w-xl text-pretty text-[16.5px] leading-relaxed text-[color:var(--color-subtle)] sm:text-lg lg:mx-0"
             >
-              Más de <span class="font-semibold text-[color:var(--color-ink)]"
-                >15 años</span
-              > reparando iPhone y Smartphones.
+              Más de <span class="font-semibold text-[color:var(--color-ink)]">15 años</span> reparando iPhone y Smartphones.
             </p>
 
             <p
               class="mx-auto mt-2 max-w-xl text-pretty text-[16.5px] leading-relaxed text-[color:var(--color-subtle)] sm:text-lg lg:mx-0"
             >
-              Proceso transparente y <span
-                class="font-semibold text-[color:var(--color-ink)]"
+              Proceso transparente y <span class="font-semibold text-[color:var(--color-ink)]"
                 >garantía por escrito</span
               >.
             </p>
 
-            <div
-              class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
-            >
+            <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
               <a
                 href={waHref}
                 class="btn-primary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-3 text-sm font-semibold sm:w-auto"
                 aria-label="Cotizar por WhatsApp"
               >
-                <WhatsAppIcon
-                  class="h-5 w-5 shrink-0 -mt-px"
-                  stroke-width="2.25"
-                  aria-hidden="true"
-                />
+                <WhatsAppIcon class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
                 Cotizar por WhatsApp
               </a>
 
@@ -423,11 +380,7 @@ const faqs = [
                 class="btn-secondary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-3 text-sm font-semibold sm:w-auto"
                 aria-label="Llamar a Smarttec"
               >
-                <PhoneCall
-                  class="h-5 w-5 shrink-0 -mt-px"
-                  stroke-width="2.25"
-                  aria-hidden="true"
-                />
+                <PhoneCall class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
                 Llamar ahora
               </a>
             </div>
@@ -461,12 +414,7 @@ const faqs = [
           <!-- iPhone Premium Animation -->
           <div class="hidden lg:block">
             <div class="iphone-container ml-auto w-[75%]" aria-hidden="true">
-              <svg
-                class="iphone-svg"
-                viewBox="0 0 300 600"
-                role="img"
-                aria-label="iPhone (WhatsApp bubbles)"
-              >
+              <svg class="iphone-svg" viewBox="0 0 300 600" role="img" aria-label="iPhone (WhatsApp bubbles)">
                 <rect
                   class="iphone-frame-stroke"
                   x="15"
@@ -485,125 +433,34 @@ const faqs = [
                   rx="55"
                   fill="none"
                   stroke-width="2"></rect>
-                <rect
-                  class="iphone-screen-fill"
-                  x="20"
-                  y="20"
-                  width="260"
-                  height="560"
-                  rx="55"></rect>
+                <rect class="iphone-screen-fill" x="20" y="20" width="260" height="560" rx="55"></rect>
                 <circle class="top-dot" cx="150" cy="45" r="5"></circle>
                 <g class="wa-bubble wa-them wa-b1">
                   <rect x="44" y="110" width="170" height="58" rx="18"></rect>
-                  <rect
-                    class="wa-highlight"
-                    x="52"
-                    y="118"
-                    width="84"
-                    height="10"
-                    rx="5"></rect>
-                  <rect
-                    class="wa-line"
-                    x="54"
-                    y="138"
-                    width="142"
-                    height="8"
-                    rx="4"></rect>
-                  <rect
-                    class="wa-line"
-                    x="54"
-                    y="152"
-                    width="110"
-                    height="8"
-                    rx="4"></rect>
+                  <rect class="wa-highlight" x="52" y="118" width="84" height="10" rx="5"></rect>
+                  <rect class="wa-line" x="54" y="138" width="142" height="8" rx="4"></rect>
+                  <rect class="wa-line" x="54" y="152" width="110" height="8" rx="4"></rect>
                 </g>
                 <g class="wa-bubble wa-me wa-b2">
                   <rect x="86" y="186" width="190" height="68" rx="18"></rect>
-                  <rect
-                    class="wa-highlight"
-                    x="98"
-                    y="195"
-                    width="92"
-                    height="10"
-                    rx="5"></rect>
-                  <rect
-                    class="wa-line"
-                    x="98"
-                    y="216"
-                    width="155"
-                    height="8"
-                    rx="4"></rect>
-                  <rect
-                    class="wa-line"
-                    x="98"
-                    y="230"
-                    width="130"
-                    height="8"
-                    rx="4"></rect>
+                  <rect class="wa-highlight" x="98" y="195" width="92" height="10" rx="5"></rect>
+                  <rect class="wa-line" x="98" y="216" width="155" height="8" rx="4"></rect>
+                  <rect class="wa-line" x="98" y="230" width="130" height="8" rx="4"></rect>
                 </g>
                 <g class="wa-bubble wa-them wa-b3">
                   <rect x="44" y="274" width="200" height="78" rx="18"></rect>
-                  <rect
-                    class="wa-highlight"
-                    x="52"
-                    y="283"
-                    width="96"
-                    height="10"
-                    rx="5"></rect>
-                  <rect
-                    class="wa-line"
-                    x="54"
-                    y="304"
-                    width="170"
-                    height="8"
-                    rx="4"></rect>
-                  <rect
-                    class="wa-line"
-                    x="54"
-                    y="318"
-                    width="150"
-                    height="8"
-                    rx="4"></rect>
-                  <rect
-                    class="wa-line"
-                    x="54"
-                    y="332"
-                    width="118"
-                    height="8"
-                    rx="4"></rect>
+                  <rect class="wa-highlight" x="52" y="283" width="96" height="10" rx="5"></rect>
+                  <rect class="wa-line" x="54" y="304" width="170" height="8" rx="4"></rect>
+                  <rect class="wa-line" x="54" y="318" width="150" height="8" rx="4"></rect>
+                  <rect class="wa-line" x="54" y="332" width="118" height="8" rx="4"></rect>
                 </g>
                 <g class="wa-bubble wa-me wa-b4">
                   <rect x="106" y="372" width="170" height="58" rx="18"></rect>
-                  <rect
-                    class="wa-highlight"
-                    x="118"
-                    y="380"
-                    width="80"
-                    height="10"
-                    rx="5"></rect>
-                  <rect
-                    class="wa-line"
-                    x="118"
-                    y="400"
-                    width="130"
-                    height="8"
-                    rx="4"></rect>
-                  <rect
-                    class="wa-line"
-                    x="118"
-                    y="414"
-                    width="100"
-                    height="8"
-                    rx="4"></rect>
+                  <rect class="wa-highlight" x="118" y="380" width="80" height="10" rx="5"></rect>
+                  <rect class="wa-line" x="118" y="400" width="130" height="8" rx="4"></rect>
+                  <rect class="wa-line" x="118" y="414" width="100" height="8" rx="4"></rect>
                 </g>
-                <rect
-                  class="wa-home-indicator"
-                  x="110"
-                  y="552"
-                  width="80"
-                  height="6"
-                  rx="3"
-                  opacity="0.35"></rect>
+                <rect class="wa-home-indicator" x="110" y="552" width="80" height="6" rx="3" opacity="0.35"></rect>
               </svg>
             </div>
           </div>
@@ -614,51 +471,27 @@ const faqs = [
 >
 <!-- PROCESS -->
 <section id="proceso" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
-  <div
-    class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10"
-  >
-    <h2
-      class="text-center text-[26px] font-semibold tracking-tight sm:text-2xl pb-4"
-    >
+  <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
+    <h2 class="text-center text-[26px] font-semibold tracking-tight sm:text-2xl pb-4">
       Así de fácil es reparar tu teléfono con nosotros
     </h2>
 
     <div class="mt-6 grid gap-4 text-center sm:grid-cols-2 lg:grid-cols-5">
       {
         [
-          [
-            MessageCircle,
-            "Nos mandas Modelo + falla",
-            "Te respondemos en minutos",
-          ],
-          [
-            Microscope,
-            "Revisamos tu teléfono a fondo",
-            "Diagnóstico profesional sin costo*",
-          ],
-          [
-            ListCheck,
-            "Te decimos las opciones disponibles",
-            "Calidad, garantía y rango.",
-          ],
-          [Wrench, "Lo arreglamos y probamos todo", "Checklist de 20+ puntos"],
-          [ShieldCheck, "Lo recoges funcionando", "Con garantía por escrito"],
+          [MessageCircle, 'Nos mandas Modelo + falla', 'Te respondemos en minutos'],
+          [Microscope, 'Revisamos tu teléfono a fondo', 'Diagnóstico profesional sin costo*'],
+          [ListCheck, 'Te decimos las opciones disponibles', 'Calidad, garantía y rango.'],
+          [Wrench, 'Lo arreglamos y probamos todo', 'Checklist de 20+ puntos'],
+          [ShieldCheck, 'Lo recoges funcionando', 'Con garantía por escrito'],
         ].map(([Icon, h, p]) => (
           <div class="card-hover rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-5 text-center">
             <div class="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)]">
-              <Icon
-                class="h-5 w-5 text-[color:var(--color-accent)]"
-                stroke-width="2.25"
-                aria-hidden="true"
-              />
+              <Icon class="h-5 w-5 text-[color:var(--color-accent)]" stroke-width="2.25" aria-hidden="true" />
             </div>
 
-            <p class="card-title mt-2 text-sm font-semibold text-[color:var(--color-ink)]">
-              {h}
-            </p>
-            <p class="card-desc mt-1 text-sm text-[color:var(--color-subtle)]">
-              {p}
-            </p>
+            <p class="card-title mt-2 text-sm font-semibold text-[color:var(--color-ink)]">{h}</p>
+            <p class="card-desc mt-1 text-sm text-[color:var(--color-subtle)]">{p}</p>
           </div>
         ))
       }
@@ -667,17 +500,10 @@ const faqs = [
 </section>
 
 <!-- BRANDS -->
-<section
-  class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14"
-  aria-label="Marcas que reparamos"
->
-  <div
-    class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10"
-  >
+<section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14" aria-label="Marcas que reparamos">
+  <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
-        Reparamos teléfonos de la mayoría de marcas.
-      </h2>
+      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Reparamos teléfonos de la mayoría de marcas.</h2>
       <p class="mt-2 text-sm text-[color:var(--color-subtle)] pb-2">
         Apple, Samsung, Huawei, Xiaomi, Motorola y muchas más.
       </p>
@@ -689,10 +515,7 @@ const faqs = [
           brands.concat(brands).map(([icon]) => (
             <div class="brand-pill card-hover rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] px-7 py-4">
               <span class="inline-flex items-center justify-center text-[color:var(--color-subtle)]">
-                <span
-                  class="brand-logo inline-flex"
-                  set:html={brandSvg(icon)}
-                />
+                <span class="brand-logo inline-flex" set:html={brandSvg(icon)} />
               </span>
             </div>
           ))
@@ -708,67 +531,33 @@ const faqs = [
 
 <!-- SERVICES -->
 <section id="servicios" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
-  <div
-    class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10"
-  >
+  <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="text-center">
-      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
-        Servicios principales
-      </h2>
-      <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
-        Cuéntanos tu modelo + falla y te damos un estimado.
-      </p>
+      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Servicios principales</h2>
+      <p class="mt-2 text-sm text-[color:var(--color-subtle)]">Cuéntanos tu modelo + falla y te damos un estimado.</p>
     </div>
 
     <div class="mt-6 grid gap-4 text-center sm:grid-cols-2 lg:grid-cols-3">
       {
         [
-          [
-            BatteryCharging,
-            "Batería (Express)",
-            "Reemplazo profesional con pruebas.",
-          ],
-          [Smartphone, "Pantalla", "Opciones de calidad según modelo."],
-          [
-            Usb,
-            "Centro de carga (Express)",
-            "Diagnóstico y reparación del puerto.",
-          ],
-          [
-            TabletSmartphone,
-            "Reemplazo de Cristal (Gorilla Glass)",
-            "Cambio de cristal con acabado premium.",
-          ],
-          [Volume2, "Audio", "Bocina, micrófono y auricular."],
-          [Camera, "Cámaras", "Pruebas de enfoque y funcionamiento."],
-          [ToggleLeft, "Botones", "Power, volumen, silencio."],
-          [Droplets, "Mojados", "Atención urgente para reducir corrosión."],
-          [
-            Power,
-            "No enciende / reinicios",
-            "Diagnóstico avanzado (según caso).",
-          ],
-          [
-            CircuitBoard,
-            "Microsoldadura / placa",
-            "Servicio avanzado con equipo especializado.",
-          ],
+          [BatteryCharging, 'Batería (Express)', 'Reemplazo profesional con pruebas.'],
+          [Smartphone, 'Pantalla', 'Opciones de calidad según modelo.'],
+          [Usb, 'Centro de carga (Express)', 'Diagnóstico y reparación del puerto.'],
+          [TabletSmartphone, 'Reemplazo de Cristal (Gorilla Glass)', 'Cambio de cristal con acabado premium.'],
+          [Volume2, 'Audio', 'Bocina, micrófono y auricular.'],
+          [Camera, 'Cámaras', 'Pruebas de enfoque y funcionamiento.'],
+          [ToggleLeft, 'Botones', 'Power, volumen, silencio.'],
+          [Droplets, 'Mojados', 'Atención urgente para reducir corrosión.'],
+          [Power, 'No enciende / reinicios', 'Diagnóstico avanzado (según caso).'],
+          [CircuitBoard, 'Microsoldadura / placa', 'Servicio avanzado con equipo especializado.'],
         ].map(([Icon, t, d]) => (
           <div class="card-hover rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 text-center">
             <div class="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)]">
-              <Icon
-                class="h-5 w-5 text-[color:var(--color-accent)]"
-                stroke-width="2.25"
-                aria-hidden="true"
-              />
+              <Icon class="h-5 w-5 text-[color:var(--color-accent)]" stroke-width="2.25" aria-hidden="true" />
             </div>
 
-            <p class="card-title mt-3 text-sm font-semibold text-[color:var(--color-ink)]">
-              {t}
-            </p>
-            <p class="card-desc mt-2 text-sm text-[color:var(--color-subtle)]">
-              {d}
-            </p>
+            <p class="card-title mt-3 text-sm font-semibold text-[color:var(--color-ink)]">{t}</p>
+            <p class="card-desc mt-2 text-sm text-[color:var(--color-subtle)]">{d}</p>
           </div>
         ))
       }
@@ -778,69 +567,47 @@ const faqs = [
 
 <!-- TRUST 1 (FORMATEADO) -->
 <section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
-  <div
-    class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10"
-  >
+  <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr]">
       <div class="text-center md:text-left">
         <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
           Te enseñamos lo que se cambia y te explicamos por qué.
         </h2>
-        <p
-          class="mt-3 text-sm leading-relaxed text-[color:var(--color-subtle)]"
-        >
-          Transparencia 100% (como debe ser)
-        </p>
+        <p class="mt-3 text-sm leading-relaxed text-[color:var(--color-subtle)]">Transparencia 100% (como debe ser)</p>
 
         <div class="mt-6 space-y-3">
-          <div
-            class="flex items-start gap-3 text-left text-sm text-[color:var(--color-subtle)]"
-          >
+          <div class="flex items-start gap-3 text-left text-sm text-[color:var(--color-subtle)]">
             <span class="text-base" aria-hidden="true">❌</span>
             <span>Sin sorpresas de último minuto</span>
           </div>
-          <div
-            class="flex items-start gap-3 text-left text-sm text-[color:var(--color-subtle)]"
-          >
+          <div class="flex items-start gap-3 text-left text-sm text-[color:var(--color-subtle)]">
             <span class="text-base" aria-hidden="true">❌</span>
             <span>Sin diagnósticos inventados</span>
           </div>
-          <div
-            class="flex items-start gap-3 text-left text-sm text-[color:var(--color-subtle)]"
-          >
+          <div class="flex items-start gap-3 text-left text-sm text-[color:var(--color-subtle)]">
             <span class="text-base" aria-hidden="true">❌</span>
             <span>Sin cobros ocultos</span>
           </div>
-          <div
-            class="flex items-start gap-3 text-left text-sm text-[color:var(--color-subtle)]"
-          >
+          <div class="flex items-start gap-3 text-left text-sm text-[color:var(--color-subtle)]">
             <span class="text-base" aria-hidden="true">❌</span>
             <span>Sin "se necesitaba cambiar esto también"</span>
           </div>
 
           <div class="pt-3"></div>
 
-          <div
-            class="flex items-start gap-3 text-left text-sm text-[color:var(--color-ink)]"
-          >
+          <div class="flex items-start gap-3 text-left text-sm text-[color:var(--color-ink)]">
             <span class="text-base" aria-hidden="true">✅</span>
             <span>Te enseñamos la pieza vieja vs la nueva</span>
           </div>
-          <div
-            class="flex items-start gap-3 text-left text-sm text-[color:var(--color-ink)]"
-          >
+          <div class="flex items-start gap-3 text-left text-sm text-[color:var(--color-ink)]">
             <span class="text-base" aria-hidden="true">✅</span>
             <span>Te explicamos por qué falló</span>
           </div>
-          <div
-            class="flex items-start gap-3 text-left text-sm text-[color:var(--color-ink)]"
-          >
+          <div class="flex items-start gap-3 text-left text-sm text-[color:var(--color-ink)]">
             <span class="text-base" aria-hidden="true">✅</span>
             <span>Pruebas frente a ti cuando aplica</span>
           </div>
-          <div
-            class="flex items-start gap-3 text-left text-sm text-[color:var(--color-ink)]"
-          >
+          <div class="flex items-start gap-3 text-left text-sm text-[color:var(--color-ink)]">
             <span class="text-base" aria-hidden="true">✅</span>
             <span>Checklist de 20+ puntos al entregar</span>
           </div>
@@ -867,16 +634,11 @@ const faqs = [
 
 <!-- REVIEWS -->
 <section id="resenas" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
-  <div
-    class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10"
-  >
+  <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
-        Qué dicen los clientes de nosotros
-      </h2>
+      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Qué dicen los clientes de nosotros</h2>
       <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
-        Reseñas de clientes en León. Servicio claro, reparación premium y
-        garantía por escrito.
+        Reseñas de clientes en León. Servicio claro, reparación premium y garantía por escrito.
       </p>
     </div>
 
@@ -899,33 +661,23 @@ const faqs = [
             <article class="review-card">
               <div class="flex items-start justify-between gap-4">
                 <div class="min-w-0">
-                  <p class="truncate text-sm font-semibold text-[color:var(--color-ink)]">
-                    {r.name}
-                  </p>
+                  <p class="truncate text-sm font-semibold text-[color:var(--color-ink)]">{r.name}</p>
                   <div class="mt-2 flex items-center gap-2">
                     <div class="review-stars" aria-label="5 de 5 estrellas">
                       {Array.from({ length: 5 }).map(() => (
                         <span class="star" aria-hidden="true">
-                          <svg
-                            viewBox="0 0 24 24"
-                            class="h-4 w-4"
-                            fill="currentColor"
-                          >
+                          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor">
                             <path d="M12 2l2.91 6.63 7.09.61-5.35 4.63 1.62 6.93L12 17.77 5.73 20.8l1.62-6.93L2 9.24l7.09-.61L12 2z" />
                           </svg>
                         </span>
                       ))}
                     </div>
-                    <p class="text-xs text-[color:var(--color-subtle)]">
-                      {r.when}
-                    </p>
+                    <p class="text-xs text-[color:var(--color-subtle)]">{r.when}</p>
                   </div>
                 </div>
               </div>
 
-              <p class="mt-3 text-sm leading-relaxed text-[color:var(--color-subtle)]">
-                {r.text}
-              </p>
+              <p class="mt-3 text-sm leading-relaxed text-[color:var(--color-subtle)]">{r.text}</p>
             </article>
           ))
         }
@@ -948,9 +700,7 @@ const faqs = [
 
 <!-- TRUST 2 -->
 <section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
-  <div
-    class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10"
-  >
+  <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr]">
       <div class="hidden md:block">
         <Image
@@ -968,20 +718,16 @@ const faqs = [
       </div>
 
       <div class="text-center md:text-left">
-        <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
-          Cuentas claras, amistades largas.
-        </h2>
+        <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Cuentas claras, amistades largas.</h2>
 
         <div class="mt-6 flex justify-center md:justify-start">
-          <ul
-            class="inline-grid max-w-md gap-3 text-left text-sm text-[color:var(--color-subtle)]"
-          >
+          <ul class="inline-grid max-w-md gap-3 text-left text-sm text-[color:var(--color-subtle)]">
             {
               [
-                "Checklist de ingreso + pruebas finales",
-                "Sellos y garantía por escrito",
-                "Refacciones Premium/OEM/alta calidad (tú eliges)",
-                "Reparación express frente a ti (cuando aplica)",
+                'Checklist de ingreso + pruebas finales',
+                'Sellos y garantía por escrito',
+                'Refacciones Premium/OEM/alta calidad (tú eliges)',
+                'Reparación express frente a ti (cuando aplica)',
               ].map((t) => (
                 <li class="relative pl-5">
                   <span
@@ -1001,13 +747,9 @@ const faqs = [
 
 <!-- FAQ -->
 <section id="faq" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
-  <div
-    class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10"
-  >
+  <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
-        Las preguntas que todos hacen 🤔
-      </h2>
+      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Las preguntas que todos hacen 🤔</h2>
       <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
         Todo lo que necesitas saber antes de traernos tu teléfono
       </p>
@@ -1026,9 +768,7 @@ const faqs = [
               aria-expanded="false"
               aria-controls={`faq-answer-${idx}`}
             >
-              <span class="text-sm font-semibold text-[color:var(--color-ink)]">
-                {faq.q}
-              </span>
+              <span class="text-sm font-semibold text-[color:var(--color-ink)]">{faq.q}</span>
               <ChevronDown
                 class="faq-icon h-5 w-5 shrink-0 text-[color:var(--color-subtle)] transition-transform duration-300"
                 stroke-width="2.25"
@@ -1042,9 +782,7 @@ const faqs = [
               style="max-height: 0;"
               aria-hidden="true"
             >
-              <div class="px-6 pb-4 text-sm leading-relaxed text-[color:var(--color-subtle)]">
-                {faq.a}
-              </div>
+              <div class="px-6 pb-4 text-sm leading-relaxed text-[color:var(--color-subtle)]">{faq.a}</div>
             </div>
           </div>
         ))
@@ -1057,21 +795,15 @@ const faqs = [
 <section id="ubicacion" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
   <div class="grid gap-4 lg:grid-cols-2">
     <!-- Info Card -->
-    <div
-      class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10"
-    >
+    <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
       <div class="mx-auto max-w-md">
         <!-- Título centrado -->
-        <h2
-          class="text-center text-[26px] font-semibold tracking-tight sm:text-2xl"
-        >
+        <h2 class="text-center text-[26px] font-semibold tracking-tight sm:text-2xl">
           Nos encuentras en León, Guanajuato 📍
         </h2>
 
         <!-- Dirección centrada -->
-        <address
-          class="mt-4 text-center not-italic text-sm text-[color:var(--color-subtle)]"
-        >
+        <address class="mt-4 text-center not-italic text-sm text-[color:var(--color-subtle)]">
           Av. Panorama 923, esquina con Blvd. Campestre, León, Gto.
         </address>
 
@@ -1086,15 +818,9 @@ const faqs = [
               ⏰
             </span>
             <div class="min-w-0 flex-1 pt-1">
-              <p class="text-sm font-semibold text-[color:var(--color-ink)]">
-                Horario
-              </p>
-              <p class="mt-1 text-sm text-[color:var(--color-subtle)]">
-                Lun–Vie: 10:00 a 19:00 hrs
-              </p>
-              <p class="text-sm text-[color:var(--color-subtle)]">
-                Sábados: 10:00 a 14:00 hrs
-              </p>
+              <p class="text-sm font-semibold text-[color:var(--color-ink)]">Horario</p>
+              <p class="mt-1 text-sm text-[color:var(--color-subtle)]">Lun–Vie: 10:00 a 19:00 hrs</p>
+              <p class="text-sm text-[color:var(--color-subtle)]">Sábados: 10:00 a 14:00 hrs</p>
             </div>
           </div>
 
@@ -1107,12 +833,8 @@ const faqs = [
               💳
             </span>
             <div class="min-w-0 flex-1 pt-1">
-              <p class="text-sm font-semibold text-[color:var(--color-ink)]">
-                Formas de pago
-              </p>
-              <p class="mt-1 text-sm text-[color:var(--color-subtle)]">
-                Efectivo · Transferencia · Tarjeta
-              </p>
+              <p class="text-sm font-semibold text-[color:var(--color-ink)]">Formas de pago</p>
+              <p class="mt-1 text-sm text-[color:var(--color-subtle)]">Efectivo · Transferencia · Tarjeta</p>
             </div>
           </div>
 
@@ -1125,9 +847,7 @@ const faqs = [
               📞
             </span>
             <div class="min-w-0 flex-1 pt-1">
-              <p class="text-sm font-semibold text-[color:var(--color-ink)]">
-                Llámanos o mándanos WhatsApp
-              </p>
+              <p class="text-sm font-semibold text-[color:var(--color-ink)]">Llámanos o mándanos WhatsApp</p>
               <a
                 class="mt-1 inline-block text-sm text-[color:var(--color-accent)] underline decoration-transparent hover:decoration-current transition-all"
                 href={telHref}
@@ -1148,11 +868,7 @@ const faqs = [
             class="btn-primary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-5 py-3 text-sm font-semibold"
             aria-label="Abrir ubicación en Google Maps (abre en una pestaña nueva)"
           >
-            <MapPin
-              class="h-5 w-5 shrink-0 -mt-px"
-              stroke-width="2.25"
-              aria-hidden="true"
-            />
+            <MapPin class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
             Cómo llegar
           </a>
         </div>
@@ -1160,9 +876,7 @@ const faqs = [
     </div>
 
     <!-- Mapa -->
-    <div
-      class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-2"
-    >
+    <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-2">
       <iframe
         class="h-[340px] lg:h-full w-full rounded-2xl"
         loading="lazy"
@@ -1175,21 +889,14 @@ const faqs = [
 
 <!-- REVIEWS CTA -->
 <section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
-  <div
-    class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10"
-  >
+  <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="text-center">
-      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
-        ¿Ya te atendimos?
-      </h2>
+      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">¿Ya te atendimos?</h2>
       <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
-        Si quedaste a gusto, una reseña honesta en Google nos ayuda muchísimo a
-        crecer en la zona.
+        Si quedaste a gusto, una reseña honesta en Google nos ayuda muchísimo a crecer en la zona.
       </p>
 
-      <div
-        class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row"
-      >
+      <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <a
           href={reviewHref}
           target="_blank"
@@ -1211,13 +918,9 @@ const faqs = [
       <p class="font-semibold text-[color:var(--color-ink)]">
         Smarttec<span class="text-xs align-super">™</span>
       </p>
-      <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
-        Reparación premium de iPhone en León, Gto.
-      </p>
+      <p class="mt-2 text-sm text-[color:var(--color-subtle)]">Reparación premium de iPhone en León, Gto.</p>
       <p class="mt-1 text-sm text-[color:var(--color-subtle)]">
-        WhatsApp y llamadas: <a
-          href={telHref}
-          class="underline decoration-transparent hover:decoration-current"
+        WhatsApp y llamadas: <a href={telHref} class="underline decoration-transparent hover:decoration-current"
           >{phone}</a
         >
       </p>
@@ -1259,12 +962,9 @@ const faqs = [
       </p>
 
       <!-- Disclaimer -->
-      <p
-        class="mt-4 text-xs text-[color:var(--color-subtle)] max-w-2xl mx-auto"
-      >
-        *Diagnóstico sin costo aplicable al dejar el equipo a reparación. Si no
-        se autoriza reparación, el diagnóstico puede generar un costo según el
-        caso.
+      <p class="mt-4 text-xs text-[color:var(--color-subtle)] max-w-2xl mx-auto">
+        *Diagnóstico sin costo aplicable al dejar el equipo a reparación. Si no se autoriza reparación, el diagnóstico
+        puede generar un costo según el caso.
       </p>
     </div>
   </div>
@@ -1274,137 +974,134 @@ const faqs = [
 
 <!-- Current year -->
 <script is:inline>
-  (() => {
-    const yearSpan = document.getElementById("currentYear");
+  ;(() => {
+    const yearSpan = document.getElementById('currentYear')
     if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
+      yearSpan.textContent = new Date().getFullYear()
     }
-  })();
+  })()
 </script>
 
 <!-- Mobile menu -->
 <script is:inline>
-  (() => {
-    const toggle = document.getElementById("navToggle");
-    const menu = document.getElementById("mobileNav");
-    const panel = document.getElementById("mobileNavPanel");
-    const backdrop = document.getElementById("navBackdrop");
-    const closeBtn = document.getElementById("navClose");
+  ;(() => {
+    const toggle = document.getElementById('navToggle')
+    const menu = document.getElementById('mobileNav')
+    const panel = document.getElementById('mobileNavPanel')
+    const backdrop = document.getElementById('navBackdrop')
+    const closeBtn = document.getElementById('navClose')
 
-    if (!toggle || !menu || !panel || !backdrop || !closeBtn) return;
+    if (!toggle || !menu || !panel || !backdrop || !closeBtn) return
 
-    let lastFocused = null;
+    let lastFocused = null
 
     const open = () => {
-      lastFocused = document.activeElement;
+      lastFocused = document.activeElement
 
-      menu.classList.remove("hidden");
-      document.body.style.overflow = "hidden";
-      toggle.setAttribute("aria-expanded", "true");
-      menu.setAttribute("aria-hidden", "false");
+      menu.classList.remove('hidden')
+      document.body.style.overflow = 'hidden'
+      toggle.setAttribute('aria-expanded', 'true')
+      menu.setAttribute('aria-hidden', 'false')
 
       requestAnimationFrame(() => {
-        backdrop.classList.add("opacity-100");
-        panel.classList.add("opacity-100", "scale-100", "translate-y-0");
-        panel.classList.remove("opacity-0", "scale-[0.98]", "translate-y-1");
-      });
+        backdrop.classList.add('opacity-100')
+        panel.classList.add('opacity-100', 'scale-100', 'translate-y-0')
+        panel.classList.remove('opacity-0', 'scale-[0.98]', 'translate-y-1')
+      })
 
-      panel.focus();
-    };
+      panel.focus()
+    }
 
     const close = () => {
-      backdrop.classList.remove("opacity-100");
-      panel.classList.remove("opacity-100", "scale-100", "translate-y-0");
-      panel.classList.add("opacity-0", "scale-[0.98]", "translate-y-1");
+      backdrop.classList.remove('opacity-100')
+      panel.classList.remove('opacity-100', 'scale-100', 'translate-y-0')
+      panel.classList.add('opacity-0', 'scale-[0.98]', 'translate-y-1')
 
-      toggle.setAttribute("aria-expanded", "false");
-      menu.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
+      toggle.setAttribute('aria-expanded', 'false')
+      menu.setAttribute('aria-hidden', 'true')
+      document.body.style.overflow = ''
 
       window.setTimeout(() => {
-        menu.classList.add("hidden");
-        if (lastFocused && typeof lastFocused.focus === "function")
-          lastFocused.focus();
-      }, 120);
-    };
+        menu.classList.add('hidden')
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus()
+      }, 120)
+    }
 
-    toggle.addEventListener("click", () => {
-      const isOpen = toggle.getAttribute("aria-expanded") === "true";
-      if (isOpen) close();
-      else open();
-    });
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true'
+      if (isOpen) close()
+      else open()
+    })
 
-    closeBtn.addEventListener("click", close);
-    backdrop.addEventListener("click", close);
+    closeBtn.addEventListener('click', close)
+    backdrop.addEventListener('click', close)
 
-    window.addEventListener("keydown", (e) => {
-      if (e.key !== "Escape") return;
-      const isOpen = toggle.getAttribute("aria-expanded") === "true";
-      if (isOpen) close();
-    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true'
+      if (isOpen) close()
+    })
 
-    panel
-      .querySelectorAll("a.nav-link")
-      .forEach((a) => a.addEventListener("click", close));
+    panel.querySelectorAll('a.nav-link').forEach((a) => a.addEventListener('click', close))
 
-    window.addEventListener("resize", () => {
-      if (window.matchMedia("(min-width: 1024px)").matches) {
-        backdrop.classList.remove("opacity-100");
-        panel.classList.add("opacity-0", "scale-[0.98]", "translate-y-1");
-        panel.classList.remove("opacity-100", "scale-100", "translate-y-0");
-        menu.classList.add("hidden");
-        toggle.setAttribute("aria-expanded", "false");
-        menu.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        backdrop.classList.remove('opacity-100')
+        panel.classList.add('opacity-0', 'scale-[0.98]', 'translate-y-1')
+        panel.classList.remove('opacity-100', 'scale-100', 'translate-y-0')
+        menu.classList.add('hidden')
+        toggle.setAttribute('aria-expanded', 'false')
+        menu.setAttribute('aria-hidden', 'true')
+        document.body.style.overflow = ''
       }
-    });
-  })();
+    })
+  })()
 </script>
 
 <!-- FAQ Accordion -->
 <script is:inline>
-  (() => {
-    const faqItems = document.querySelectorAll(".faq-item");
+  ;(() => {
+    const faqItems = document.querySelectorAll('.faq-item')
 
     faqItems.forEach((item) => {
-      const button = item.querySelector(".faq-button");
-      const answer = item.querySelector(".faq-answer");
-      const icon = item.querySelector(".faq-icon");
+      const button = item.querySelector('.faq-button')
+      const answer = item.querySelector('.faq-answer')
+      const icon = item.querySelector('.faq-icon')
 
-      if (!button || !answer || !icon) return;
+      if (!button || !answer || !icon) return
 
-      button.addEventListener("click", () => {
-        const isExpanded = button.getAttribute("aria-expanded") === "true";
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true'
 
         // Close all other items
         faqItems.forEach((otherItem) => {
-          if (otherItem === item) return;
+          if (otherItem === item) return
 
-          const otherButton = otherItem.querySelector(".faq-button");
-          const otherAnswer = otherItem.querySelector(".faq-answer");
-          const otherIcon = otherItem.querySelector(".faq-icon");
+          const otherButton = otherItem.querySelector('.faq-button')
+          const otherAnswer = otherItem.querySelector('.faq-answer')
+          const otherIcon = otherItem.querySelector('.faq-icon')
 
           if (otherButton && otherAnswer && otherIcon) {
-            otherButton.setAttribute("aria-expanded", "false");
-            otherAnswer.setAttribute("aria-hidden", "true");
-            otherAnswer.style.maxHeight = "0";
-            otherIcon.style.transform = "rotate(0deg)";
+            otherButton.setAttribute('aria-expanded', 'false')
+            otherAnswer.setAttribute('aria-hidden', 'true')
+            otherAnswer.style.maxHeight = '0'
+            otherIcon.style.transform = 'rotate(0deg)'
           }
-        });
+        })
 
         // Toggle current item
         if (isExpanded) {
-          button.setAttribute("aria-expanded", "false");
-          answer.setAttribute("aria-hidden", "true");
-          answer.style.maxHeight = "0";
-          icon.style.transform = "rotate(0deg)";
+          button.setAttribute('aria-expanded', 'false')
+          answer.setAttribute('aria-hidden', 'true')
+          answer.style.maxHeight = '0'
+          icon.style.transform = 'rotate(0deg)'
         } else {
-          button.setAttribute("aria-expanded", "true");
-          answer.setAttribute("aria-hidden", "false");
-          answer.style.maxHeight = answer.scrollHeight + "px";
-          icon.style.transform = "rotate(180deg)";
+          button.setAttribute('aria-expanded', 'true')
+          answer.setAttribute('aria-hidden', 'false')
+          answer.style.maxHeight = answer.scrollHeight + 'px'
+          icon.style.transform = 'rotate(180deg)'
         }
-      });
-    });
-  })();
+      })
+    })
+  })()
 </script>

@@ -22,6 +22,7 @@ const ogImageUrl = ogImage || `${site}/og-image.jpg`
 const phoneE164 = '+524792155743'
 const lat = 21.1526109
 const lng = -101.695822
+const mapUrl = `https://www.google.com/maps?q=${lat},${lng}`
 
 const schema = {
   '@context': 'https://schema.org',
@@ -34,7 +35,7 @@ const schema = {
   priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Blvd. Campestre 923, Valle del Campestre',
+    streetAddress: 'Av. Panorama 923, Valle del Campestre',
     addressLocality: 'León',
     addressRegion: 'Guanajuato',
     postalCode: '37160',
@@ -45,6 +46,73 @@ const schema = {
     latitude: lat,
     longitude: lng,
   },
+  areaServed: [
+    {
+      '@type': 'City',
+      name: 'León',
+    },
+    {
+      '@type': 'State',
+      name: 'Guanajuato',
+    },
+  ],
+  serviceArea: {
+    '@type': 'City',
+    name: 'León, Guanajuato',
+  },
+  hasMap: mapUrl,
+  makesOffer: [
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Reparación de iPhone',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Reparación de celulares',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Cambio de batería',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Reemplazo de pantalla',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Centro de carga',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Microsoldadura',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Reparación por mojado',
+      },
+    },
+  ],
+  sameAs: ['https://maps.app.goo.gl/zoLwQhnJJezbHej47'],
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
@@ -141,7 +209,9 @@ const schema = {
     <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
 
     <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -155,18 +225,28 @@ const schema = {
         const key = 'smarttec-theme'
         const root = document.documentElement
 
-        const saved = localStorage.getItem(key)
+        const readStored = () => {
+          try {
+            return localStorage.getItem(key)
+          } catch {
+            return null
+          }
+        }
+
+        const saved = readStored()
         const hasOverride = saved === 'dark' || saved === 'light'
 
         const apply = (mode) => {
           if (mode === 'dark') root.classList.add('dark')
           else root.classList.remove('dark')
+          root.dataset.theme = mode
         }
 
         const mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null
         const prefersDark = mq ? mq.matches : false
 
         apply(hasOverride ? saved : prefersDark ? 'dark' : 'light')
+        root.classList.add('theme-ready')
 
         if (!hasOverride && mq) {
           const onChange = (e) => apply(e.matches ? 'dark' : 'light')
@@ -200,6 +280,14 @@ const schema = {
       ;(() => {
         const key = 'smarttec-theme'
 
+        const writeStored = (value) => {
+          try {
+            localStorage.setItem(key, value)
+          } catch {
+            // ignore storage write failures
+          }
+        }
+
         const syncThemeIcon = () => {
           const btn = document.getElementById('themeToggle')
           if (!btn) return
@@ -228,13 +316,15 @@ const schema = {
           if (document.startViewTransition) {
             document.startViewTransition(() => {
               root.classList.toggle('dark')
-              localStorage.setItem(key, isDark ? 'dark' : 'light')
+              root.dataset.theme = isDark ? 'dark' : 'light'
+              writeStored(isDark ? 'dark' : 'light')
               syncThemeIcon()
             })
           } else {
             // Fallback instantáneo
             root.classList.toggle('dark')
-            localStorage.setItem(key, isDark ? 'dark' : 'light')
+            root.dataset.theme = isDark ? 'dark' : 'light'
+            writeStored(isDark ? 'dark' : 'light')
             syncThemeIcon()
           }
         }
@@ -248,6 +338,12 @@ const schema = {
 
           handleToggle()
         })
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', syncThemeIcon, { once: true })
+        } else {
+          syncThemeIcon()
+        }
       })()
     </script>
   </body>

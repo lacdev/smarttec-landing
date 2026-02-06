@@ -35,7 +35,8 @@ import Sun from '@lucide/astro/icons/sun'
 
 const phone = '+52 479 215 5743'
 const telHref = 'tel:+524792155743'
-const mapsHref = 'https://www.google.com/maps/search/?api=1&query=Smarttec+Blvd+Campestre+923+Leon+Gto'
+const mapsHref =
+  'https://www.google.com/maps/search/?api=1&query=Av.+Panorama+923+esquina+con+Blvd.+Campestre+Valle+del+Campestre+Leon+Gto'
 
 const waText = encodeURIComponent(
   'Hola Smarttec, quiero cotizar. Origen: Sitio web. Modelo: _____ Falla: _____ ¿Prende?: _____ ¿Se mojó o recibió golpe?: _____ (Adjunto foto/video).'
@@ -135,7 +136,7 @@ const reviews = [
 const faqs = [
   {
     q: '¿Cuánto tarda la reparación?',
-    a: 'Express (batería/carga): 1-2 hrs. Pantalla: 2-4 hrs según modelo. Otros: Te damos estimado en el diagnóstico.',
+    a: 'En León, Gto. Express (batería/carga): 1-2 hrs. Pantalla: 2-4 hrs según modelo. Otros: Te damos estimado en el diagnóstico.',
   },
   {
     q: '¿Pierdo mi información?',
@@ -147,11 +148,11 @@ const faqs = [
   },
   {
     q: '¿Puedo esperar mientras reparan mi teléfono?',
-    a: 'Sí, en reparaciones express (batería/centro de carga) puedes esperar. En otras te avisamos cuando esté listo por WhatsApp.',
+    a: 'Sí, en reparaciones express (batería/centro de carga en León) puedes esperar. En otras te avisamos cuando esté listo por WhatsApp.',
   },
   {
     q: '¿Trabajan con todas las marcas?',
-    a: 'iPhone es nuestra especialidad (15+ años). También Samsung, Xiaomi, Huawei, Motorola, etc.',
+    a: 'iPhone es nuestra especialidad (15+ años). También Samsung, Xiaomi, Huawei, Motorola, etc. Servicio técnico en León y reparación de celulares en León, Gto.',
   },
   {
     q: '¿Puedo ver el proceso?',
@@ -169,8 +170,8 @@ const faqs = [
 ---
 
 <Layout
-  title="Smarttec | Reparación premium de iPhone en León"
-  description="Reparación premium de iPhone y smartphones en León, Gto. +15 años de experiencia. Express en batería/centro de carga (según modelo), pantallas, mojados y placa. 90 días de garantía por escrito."
+  title="Smarttec | Reparación de iPhone y Celulares en León, Guanajuato"
+  description="Reparación de iPhone y celulares en León, Guanajuato. +15 años de experiencia. Express en batería/centro de carga (según modelo), pantallas, mojados y placa. 90 días de garantía por escrito."
 >
   <!-- HEADER -->
   <header
@@ -219,7 +220,7 @@ const faqs = [
         <a
           href={waHref}
           class="btn-primary inline-flex h-10 items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold sm:px-5 sm:gap-3"
-          aria-label="Cotizar por WhatsApp"
+          aria-label="Cotizar reparación de iPhone y celulares en León por WhatsApp"
         >
           <WhatsAppIcon class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
           <span class="sm:hidden">Cotizar</span>
@@ -344,17 +345,18 @@ const faqs = [
             <p
               class="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-card)]/60 px-4 py-2 text-xs font-semibold text-[color:var(--color-subtle)] backdrop-blur"
             >
-              Reparación de iPhone y Smartphone premium en León, Guanajuato.
+              Reparación de iPhone y celulares en León, Gto. Servicio express.
             </p>
 
             <h1 class="mt-5 text-balance text-5xl font-semibold tracking-tight leading-[1.02] sm:text-6xl lg:text-7xl">
-              Tu teléfono, como nuevo.
+              Reparación de iPhone en León, Gto.
             </h1>
 
             <p
               class="mx-auto mt-5 max-w-xl text-pretty text-[16.5px] leading-relaxed text-[color:var(--color-subtle)] sm:text-lg lg:mx-0"
             >
-              Más de <span class="font-semibold text-[color:var(--color-ink)]">15 años</span> reparando iPhone y Smartphones.
+              Más de <span class="font-semibold text-[color:var(--color-ink)]">15 años</span> reparando iPhone y celulares
+              en León.
             </p>
 
             <p
@@ -362,14 +364,14 @@ const faqs = [
             >
               Proceso transparente y <span class="font-semibold text-[color:var(--color-ink)]"
                 >garantía por escrito</span
-              >.
+              >. Trato claro y directo.
             </p>
 
             <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
               <a
                 href={waHref}
                 class="btn-primary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-3 text-sm font-semibold sm:w-auto"
-                aria-label="Cotizar por WhatsApp"
+                aria-label="Cotizar reparación de iPhone y celulares en León por WhatsApp"
               >
                 <WhatsAppIcon class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
                 Cotizar por WhatsApp
@@ -378,7 +380,7 @@ const faqs = [
               <a
                 href={telHref}
                 class="btn-secondary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-3 text-sm font-semibold sm:w-auto"
-                aria-label="Llamar a Smarttec"
+                aria-label="Llamar a Smarttec en León, Guanajuato"
               >
                 <PhoneCall class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
                 Llamar ahora
@@ -473,16 +475,16 @@ const faqs = [
 <section id="proceso" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
   <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <h2 class="text-center text-[26px] font-semibold tracking-tight sm:text-2xl pb-4">
-      Así de fácil es reparar tu teléfono con nosotros
+      Así de fácil es reparar tu celular con nosotros
     </h2>
 
     <div class="mt-6 grid gap-4 text-center sm:grid-cols-2 lg:grid-cols-5">
       {
         [
-          [MessageCircle, 'Nos mandas Modelo + falla', 'Te respondemos en minutos'],
-          [Microscope, 'Revisamos tu teléfono a fondo', 'Diagnóstico profesional sin costo*'],
+          [MessageCircle, 'Nos mandas modelo + falla', 'Te respondemos en minutos'],
+          [Microscope, 'Revisamos tu iPhone o celular a fondo', 'Diagnóstico profesional sin costo*'],
           [ListCheck, 'Te decimos las opciones disponibles', 'Calidad, garantía y rango.'],
-          [Wrench, 'Lo arreglamos y probamos todo', 'Checklist de 20+ puntos'],
+          [Wrench, 'Lo reparamos y probamos todo', 'Checklist de 20+ puntos'],
           [ShieldCheck, 'Lo recoges funcionando', 'Con garantía por escrito'],
         ].map(([Icon, h, p]) => (
           <div class="card-hover rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-5 text-center">
@@ -503,7 +505,7 @@ const faqs = [
 <section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14" aria-label="Marcas que reparamos">
   <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Reparamos teléfonos de la mayoría de marcas.</h2>
+      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Reparamos celulares de la mayoría de marcas.</h2>
       <p class="mt-2 text-sm text-[color:var(--color-subtle)] pb-2">
         Apple, Samsung, Huawei, Xiaomi, Motorola y muchas más.
       </p>
@@ -533,23 +535,25 @@ const faqs = [
 <section id="servicios" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
   <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="text-center">
-      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Servicios principales</h2>
-      <p class="mt-2 text-sm text-[color:var(--color-subtle)]">Cuéntanos tu modelo + falla y te damos un estimado.</p>
+      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Algunos de nuestros servicios</h2>
+      <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
+        Reparación profesional de iPhone y celulares con diagnóstico transparente.
+      </p>
     </div>
 
     <div class="mt-6 grid gap-4 text-center sm:grid-cols-2 lg:grid-cols-3">
       {
         [
-          [BatteryCharging, 'Batería (Express)', 'Reemplazo profesional con pruebas.'],
-          [Smartphone, 'Pantalla', 'Opciones de calidad según modelo.'],
-          [Usb, 'Centro de carga (Express)', 'Diagnóstico y reparación del puerto.'],
+          [BatteryCharging, 'Batería (Express)', 'Cambio de batería en León con pruebas profesionales.'],
+          [Smartphone, 'Pantalla', 'Cambio de pantalla y batería en León según modelo.'],
+          [Usb, 'Centro de carga (Express)', 'Centro de carga en León con diagnóstico preciso.'],
           [TabletSmartphone, 'Reemplazo de Cristal (Gorilla Glass)', 'Cambio de cristal con acabado premium.'],
           [Volume2, 'Audio', 'Bocina, micrófono y auricular.'],
           [Camera, 'Cámaras', 'Pruebas de enfoque y funcionamiento.'],
           [ToggleLeft, 'Botones', 'Power, volumen, silencio.'],
           [Droplets, 'Mojados', 'Atención urgente para reducir corrosión.'],
           [Power, 'No enciende / reinicios', 'Diagnóstico avanzado (según caso).'],
-          [CircuitBoard, 'Microsoldadura / placa', 'Servicio avanzado con equipo especializado.'],
+          [CircuitBoard, 'Microsoldadura / placa', 'Servicio técnico en León con equipo especializado.'],
         ].map(([Icon, t, d]) => (
           <div class="card-hover rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 text-center">
             <div class="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-card)]">
@@ -573,7 +577,9 @@ const faqs = [
         <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">
           Te enseñamos lo que se cambia y te explicamos por qué.
         </h2>
-        <p class="mt-3 text-sm leading-relaxed text-[color:var(--color-subtle)]">Transparencia 100% (como debe ser)</p>
+        <p class="mt-3 text-sm leading-relaxed text-[color:var(--color-subtle)]">
+          Transparencia 100% en cada reparación
+        </p>
 
         <div class="mt-6 space-y-3">
           <div class="flex items-start gap-3 text-left text-sm text-[color:var(--color-subtle)]">
@@ -617,7 +623,7 @@ const faqs = [
       <div class="hidden md:block">
         <Image
           src={image2}
-          alt="Ejemplo de reparación documentada y piezas reemplazadas"
+          alt="Ejemplo de reparación documentada en León, Gto. y piezas reemplazadas"
           width={900}
           height={650}
           loading="lazy"
@@ -638,7 +644,7 @@ const faqs = [
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">Qué dicen los clientes de nosotros</h2>
       <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
-        Reseñas de clientes en León. Servicio claro, reparación premium y garantía por escrito.
+        Reseñas reales en León, Gto. Servicio claro y garantía por escrito.
       </p>
     </div>
 
@@ -705,7 +711,7 @@ const faqs = [
       <div class="hidden md:block">
         <Image
           src={image4}
-          alt="Ejemplo de checklist, sellos y garantía por escrito"
+          alt="Ejemplo de checklist, sellos y garantía por escrito en León, Gto."
           width={900}
           height={650}
           loading="lazy"
@@ -799,12 +805,12 @@ const faqs = [
       <div class="mx-auto max-w-md">
         <!-- Título centrado -->
         <h2 class="text-center text-[26px] font-semibold tracking-tight sm:text-2xl">
-          Nos encuentras en León, Guanajuato 📍
+          Reparación de celulares en León, Guanajuato 📍
         </h2>
 
         <!-- Dirección centrada -->
         <address class="mt-4 text-center not-italic text-sm text-[color:var(--color-subtle)]">
-          Av. Panorama 923, esquina con Blvd. Campestre, León, Gto.
+          Av. Panorama 923, esq. Blvd. Campestre, Valle del Campestre, León, Gto.
         </address>
 
         <!-- Info Grid - Alineación consistente -->
@@ -866,7 +872,7 @@ const faqs = [
             target="_blank"
             rel="noopener noreferrer"
             class="btn-primary inline-flex w-full items-center justify-center gap-3 rounded-2xl px-5 py-3 text-sm font-semibold"
-            aria-label="Abrir ubicación en Google Maps (abre en una pestaña nueva)"
+            aria-label="Abrir ubicación en Google Maps en León, Gto. (abre en una pestaña nueva)"
           >
             <MapPin class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
             Cómo llegar
@@ -881,8 +887,8 @@ const faqs = [
         class="h-[340px] lg:h-full w-full rounded-2xl"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=Av.%20Panorama%20923%20Leon%20Guanajuato&output=embed"
-        title="Mapa Smarttec"></iframe>
+        src="https://www.google.com/maps?q=Av.%20Panorama%20923%20esquina%20con%20Blvd.%20Campestre%20Valle%20del%20Campestre%20Le%C3%B3n%20Guanajuato&output=embed"
+        title="Mapa Smarttec León, Gto."></iframe>
     </div>
   </div>
 </section>
@@ -891,7 +897,7 @@ const faqs = [
 <section class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
   <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">
     <div class="text-center">
-      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">¿Ya te atendimos?</h2>
+      <h2 class="text-[26px] font-semibold tracking-tight sm:text-2xl">¿Ya atendimos tu celular?</h2>
       <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
         Si quedaste a gusto, una reseña honesta en Google nos ayuda muchísimo a crecer en la zona.
       </p>
@@ -918,7 +924,12 @@ const faqs = [
       <p class="font-semibold text-[color:var(--color-ink)]">
         Smarttec<span class="text-xs align-super">™</span>
       </p>
-      <p class="mt-2 text-sm text-[color:var(--color-subtle)]">Reparación premium de iPhone en León, Gto.</p>
+      <p class="mt-2 text-sm text-[color:var(--color-subtle)]">
+        Reparación de iPhone en León, Gto. y reparación de celulares en León, Gto.
+      </p>
+      <p class="mt-1 text-sm text-[color:var(--color-subtle)]">
+        Av. Panorama 923, esq. Blvd. Campestre, Valle del Campestre, León, Gto.
+      </p>
       <p class="mt-1 text-sm text-[color:var(--color-subtle)]">
         WhatsApp y llamadas: <a href={telHref} class="underline decoration-transparent hover:decoration-current"
           >{phone}</a

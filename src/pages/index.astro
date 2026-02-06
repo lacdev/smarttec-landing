@@ -178,7 +178,7 @@ const faqs = [
     class="sticky top-0 z-50 border-b border-[color:var(--color-border)] bg-[color:var(--color-bg)]/80 backdrop-blur"
   >
     <div class="mx-auto flex max-w-[1100px] items-center justify-between gap-3 px-4 py-3">
-      <a href="#top" class="flex items-center gap-2" aria-label="Smarttec, ir al inicio">
+      <a href="#top" class="hidden items-center gap-2 lg:flex" aria-label="Smarttec, ir al inicio">
         <span
           aria-hidden="true"
           class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[color:var(--color-fg)] text-[color:var(--color-bg)]"
@@ -187,6 +187,40 @@ const faqs = [
         </span>
         <span class="hidden sm:inline text-sm font-semibold tracking-tight">Smarttec</span>
       </a>
+
+      <div class="flex items-center gap-2 lg:hidden">
+        <button
+          id="navToggle"
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-border)]"
+          aria-label="Abrir menú"
+          aria-controls="mobileNav"
+          aria-expanded="false"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="M4 6h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 18h16"></path>
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          data-theme-toggle
+          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-border)]"
+          aria-label="Cambiar modo claro/oscuro"
+        >
+          <Moon data-theme-icon="moon" class="h-5 w-5" stroke-width="2.25" aria-hidden="true" />
+          <Sun data-theme-icon="sun" class="hidden h-5 w-5" stroke-width="2.25" aria-hidden="true" />
+        </button>
+      </div>
 
       <nav class="hidden items-center gap-6 lg:flex" aria-label="Navegación principal">
         <a
@@ -217,47 +251,25 @@ const faqs = [
       </nav>
 
       <div class="flex items-center gap-2">
-        <a
-          href={waHref}
-          class="btn-primary inline-flex h-10 items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold sm:px-5 sm:gap-3"
-          aria-label="Cotizar reparación de iPhone y celulares en León por WhatsApp"
-        >
-          <WhatsAppIcon class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
-          <span class="sm:hidden">Cotizar</span>
-          <span class="hidden sm:inline">Cotizar por WhatsApp</span>
-        </a>
-
         <button
-          id="themeToggle"
           type="button"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-border)]"
+          data-theme-toggle
+          class="hidden h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-border)] lg:inline-flex"
           aria-label="Cambiar modo claro/oscuro"
         >
           <Moon data-theme-icon="moon" class="h-5 w-5" stroke-width="2.25" aria-hidden="true" />
           <Sun data-theme-icon="sun" class="hidden h-5 w-5" stroke-width="2.25" aria-hidden="true" />
         </button>
 
-        <button
-          id="navToggle"
-          type="button"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-border)] lg:hidden"
-          aria-label="Abrir menú"
-          aria-controls="mobileNav"
-          aria-expanded="false"
+        <a
+          href={waHref}
+          class="btn-primary inline-flex h-11 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold sm:h-10 sm:px-5 sm:gap-3"
+          aria-label="Cotizar reparación de iPhone y celulares en León por WhatsApp"
         >
-          <svg
-            viewBox="0 0 24 24"
-            class="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-          >
-            <path d="M4 6h16"></path>
-            <path d="M4 12h16"></path>
-            <path d="M4 18h16"></path>
-          </svg>
-        </button>
+          <WhatsAppIcon class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
+          <span class="sm:hidden">Cotizar por WhatsApp</span>
+          <span class="hidden sm:inline">Cotizar por WhatsApp</span>
+        </a>
       </div>
     </div>
   </header>
@@ -272,7 +284,7 @@ const faqs = [
 
     <aside
       id="mobileNavPanel"
-      class="absolute right-4 top-4 w-[min(92vw,360px)] rounded-3xl border border-[color:var(--color-border)]
+      class="absolute left-4 top-4 w-[min(92vw,360px)] rounded-3xl border border-[color:var(--color-border)]
              bg-[color:var(--color-card)] shadow-2xl backdrop-blur-sm
              opacity-0 scale-[0.98] translate-y-1 transition-[opacity,transform] duration-120 ease-out"
       role="dialog"
@@ -469,8 +481,21 @@ const faqs = [
         </div>
       </div>
     </section>
-  </main></Layout
->
+  </main>
+
+  <div
+    class="fixed inset-x-0 bottom-0 z-40 border-t border-[color:var(--color-border)] bg-[color:var(--color-bg)]/90 px-4 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-3 shadow-[0_-10px_30px_rgba(2,6,23,0.12)] backdrop-blur-sm lg:hidden"
+  >
+    <a
+      href={waHref}
+      class="btn-primary mobile-cta inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-4 text-base font-semibold"
+      aria-label="Cotizar reparación de iPhone y celulares en León por WhatsApp"
+    >
+      <WhatsAppIcon class="h-5 w-5 shrink-0 -mt-px" stroke-width="2.25" aria-hidden="true" />
+      Cotizar por WhatsApp
+    </a>
+  </div>
+</Layout>
 <!-- PROCESS -->
 <section id="proceso" class="mx-auto max-w-[1100px] px-4 pt-10 sm:pt-14">
   <div class="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10">

@@ -289,23 +289,25 @@ const schema = {
         }
 
         const syncThemeIcon = () => {
-          const btn = document.getElementById('themeToggle')
-          if (!btn) return
-
-          const moon = btn.querySelector('[data-theme-icon="moon"]')
-          const sun = btn.querySelector('[data-theme-icon="sun"]')
-          if (!(moon instanceof Element) || !(sun instanceof Element)) return
+          const buttons = document.querySelectorAll('[data-theme-toggle]')
+          if (!buttons.length) return
 
           const root = document.documentElement
           const isDark = root.classList.contains('dark')
 
-          if (isDark) {
-            sun.classList.remove('hidden')
-            moon.classList.add('hidden')
-          } else {
-            moon.classList.remove('hidden')
-            sun.classList.add('hidden')
-          }
+          buttons.forEach((btn) => {
+            const moon = btn.querySelector('[data-theme-icon="moon"]')
+            const sun = btn.querySelector('[data-theme-icon="sun"]')
+            if (!(moon instanceof Element) || !(sun instanceof Element)) return
+
+            if (isDark) {
+              sun.classList.remove('hidden')
+              moon.classList.add('hidden')
+            } else {
+              moon.classList.remove('hidden')
+              sun.classList.add('hidden')
+            }
+          })
         }
 
         const handleToggle = () => {
@@ -333,7 +335,7 @@ const schema = {
           const target = e.target
           if (!(target instanceof Element)) return
 
-          const btn = target.closest('#themeToggle')
+          const btn = target.closest('[data-theme-toggle]')
           if (!btn) return
 
           handleToggle()
